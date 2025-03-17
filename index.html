@@ -7,21 +7,129 @@
     <link rel="shortcut icon" href="./Images/Screenshot 2024-09-08 082303.png" type="image/x-icon">
 </head>
 <body>
-    <p style="opacity: 0.5;">This is para</p>
-    <input type="text" placeholder="Name please!">
-    <br><br>
+    <style>
+        .ob:hover{
+            opacity: 0.5;
+        }
+        *{
+            /* box-sizing: border-box; */
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+    <p class="ob">This is para</p>
+    <!--Heading Tags-->
+    <h1>This is h1 tag</h1>
+    <h2>h2 tag</h2>
+    <h3>h3 tag</h3>
+    <h4>h4 tag</h4>
+    <h5>h5 tag</h5>
+    <h6>h6 tag</h6>
     <!-- <img src='./Images/Screenshot 2024-09-08 082303.png' alt="not found" width="400" height="300" title="Macbook"><br><br> -->
-    <a href="https://windows.in">Windows</a>
-    <p><i>I'm <b>pannerselvan</b></i>working at KTT</p>
+    <a href="https://windows.com" target="_blank">Windows</a>
+    <p><i>I'm <b>pannerselvan</b></i> Intern at KTT</p>
     <p><sub>Hello</sub>there</p>
     <h1>This is <sup>H1 tag</sup></h1>
-    <h1><del>Student</del><ins>Intern</ins></h1>
+    <h1><del>Student</del><ins> Intern</ins></h1>
     <h4><em>At </em>CBE</h4>
     <p>I am learning HTML with the help of <mark>W3school and MDN Docs</mark></p>
     <p><strong>I am also practing the topics that I learned</strong></p>
     <blockquote>This is msg is quote <q>Try not to become a man of success but rather to become a man of value.</q></blockquote>
-    <p><abbr title="This is the title">Hover me to see the  title</abbr></p>
+    <p><abbr title="Title is HTML">Hover me to see the  title</abbr></p>
     <br>
-    <h3>In html the comments are repesented by this <sup></sup></h3>
+    <p><b>bold</b><strong> strong</strong></p>
+    <h1><small>Small text.</small></h1>
+    <p style="color: rgba(255,129,123, 0.5);">Colours</p>
+    <a href="https:airbnb.com" target="_blank">
+    <img src="./Images/Screenshot 2024-09-08 082303.png" width="300" height="250">
+    <picture>
+        <source media="(max-width: 449px)" srcset="/Images/Screenshot 2024-09-08 082303.png">
+        <source media="(min-width: 650px)" srcset="/Images/image.png">
+        <img src="./Images/Screenshot 2024-09-08 082303.png" alt="">
+    </picture>
+</a>
+    <table>
+        <colgroup>
+            <col span="2" style="background-color: antiquewhite;">
+            <col background-color="red">
+        </colgroup>
+        <style>
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+            th, td {
+                border: 1px dotted black;
+                padding: 10;
+                text-align: left;
+            }
+            th {
+                background-color: #f2f2f2;
+            }
+        </style>
+        <caption>Details</caption>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Country</th>
+        </tr>
+        <tr>
+            <td>Alice</td>
+            <td>21</td>
+            <td>UK</td>
+        </tr>
+        <tr>
+            <td>Brendon</td>
+            <td>23</td>
+            <td>USA</td>
+        </tr>
+    </table>
+    <br><br>
+    <table>
+        <tr>
+            <th>RollNo</th>
+            <th colspan="2">Dept</th>
+        </tr>
+        <tr>
+            <td>sdkf</td>
+            <td>CSE</td>
+            <td>BE</td>
+        </tr>
+    </table>
+    <br><br>
+    <table>
+        <tr>
+            <th rowspan="3">Name</th>
+            <th>Age</th>
+            <th>Country</th>
+            <th>Captial</th>
+        </tr>
+        <tr>
+            <td>Alice</td>
+            <td>21</td>
+            <td>UK</td>
+        </tr>
+        <tr>
+            <td>Brendon</td>
+            <td>23</td>
+            <td>USA</td>
+        </tr>
+    </table>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+    <ol>
+        <li>one</li>
+        <li>two</li>
+        <li>three</li>
+    </ol>
+    <dl>
+        <dt>1</dt>
+        <dl>One</dl>
+        <dt>2</dt>
+        <dl style="">Two</dl>
+    </dl>
 </body>
 </html>
