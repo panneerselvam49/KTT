@@ -141,8 +141,8 @@
             <article style="float: left; padding: 10px; width: 68%; background-color: aqua; height: 110px;">Lorem ipsum,
                 dolor sit amet consectetur adipisicing elit. Totam odit natus in numquam, iusto quas a corrupti iure
                 deserunt, maxime temporibus, sit adipisci tenetur rerum porro debitis? Quo, alias tenetur.</article>
-            <p style="float: left; width: 100px; padding: 10px; height: 100px;">This is additional information</p>
-            <footer style="background-color: darkblue; clear: both;">Footer</footer>
+            <aside style="float: left; width: 100px; padding: 10px; height: 100px; background-color: salmon;">This is additional information</aside>
+            <footer style="background-color: darkblue; clear: both; color: white;">Footer</footer>
             <!--Responsive Design-->
             <picture>
                 <source srcset="./Images/Screenshot 2024-09-08 082303.png" media="(max-width: 600px)">
@@ -165,15 +165,58 @@
                     <textarea id="email" placeholder="Enter your emailId"></textarea><br>
                     <label for="pwd">Password:</label><br>
                     <input type="password" id="pwd" name="pwd" placeholder="Enter your password" required><br>
+                    <input type="radio" id="male" name="gender" required>
                     <label for="male">Male</label>
-                    <input type="radio" id="male" name="gender">
-                    <label for="female">Female</label>
-                    <input type="radio" id="female" name="gender"><br>
+                    <input type="radio" id="female" name="gender">
+                    <label for="female">Female</label><br>
                     <input type="submit" value="Submit">
                     <input type="reset" value="Reset">
+                    <input type="checkbox" id="rem">
+                    <label for="rem">Remember me</label>
                 </fieldset>
             </form>
             <a href="/Images/cap.jpeg" download>download</a>
-</body>
+            <br>
+            <a href="mailto:2k21ece130@kiot.ac.in">Contact us</a>
+            <br>
+            <a href="#pg2">go to page 2</a>
+            <br>
+            <a href="tel:1234567890">Phone</a>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maiores quisquam asperiores labore ad officia aspernatur numquam reprehenderit quaerat accusamus debitis. Soluta distinctio corporis sunt itaque vitae quos explicabo totam, illo veniam, quidem, dicta illum odio! Magni, laboriosam incidunt at totam sequi consequuntur, hic debitis eligendi sit voluptas eum tempora, quis corporis? Consequatur obcaecati dolor expedita sequi fuga odit, et vel molestiae. Quam perspiciatis, maiores obcaecati voluptatibus nesciunt, nostrum libero quae amet doloribus distinctio dolorem reiciendis? Esse minus neque quam hic sed est, quisquam eum cum beatae assumenda totam nam ab optio, illo corporis quos unde maiores non accusantium earum voluptatibus.</p>
+            <p id="pg2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis rem nostrum exercitationem. Cum illo eum placeat, quasi nostrum nisi sapiente, deleniti consectetur maxime dolore id veritatis eligendi iste? Placeat doloribus non eveniet odit excepturi mollitia, ea consectetur beatae. Ullam, quia quod? Numquam, velit iste reprehenderit eligendi qui aspernatur mollitia provident dolor vero fuga incidunt asperiores, possimus non, deserunt illum excepturi dolorum ipsam impedit enim magni odit harum delectus ipsum blanditiis. Quidem delectus pariatur obcaecati! Delectus, nam, aperiam neque ipsa nisi vero molestias, quas natus libero officiis sint autem vel praesentium tenetur consequuntur. Quo beatae temporibus eveniet dolores adipisci eligendi autem ratione incidunt voluptas ducimus? Itaque est, rem perferendis expedita optio sapiente voluptas minus dolor unde non necessitatibus! Quis eius, nulla quod facere inventore officia totam culpa maiores qui ullam nesciunt corporis vel, ipsum consequuntur quae, tenetur alias aperiam eos voluptas tempora. Dicta illo dolorum impedit quos accusamus eligendi nemo sequi, sed minima sit error voluptate quidem, perferendis a est fugit, repudiandae reiciendis obcaecati et. Illum nisi consequatur magni ea dolorem voluptas provident ipsum veniam nihil repellendus earum voluptates atque, sed, doloremque impedit incidunt nobis quis praesentium modi, pariatur excepturi commodi culpa. Temporibus rem expedita suscipit obcaecati illo harum eveniet provident!</p>
+            <abbr title="Hyper Text Markup Language">HTML</abbr>
+            <h2>Search Form (GET)</h2>
+            <form action="/search" method="get">
+            <label for="query">Search Query:</label>
+            <input type="text" id="query" placeholder="name">
+            <button type="submit">Search</button>
+    </form>
+    <h2>Login Form (POST)</h2>
+    <form action="/login" method="POST">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username">
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password">
+        <br>
+        <button type="submit">Login</button>
+    </form>
+    <br>
+    <video controls>
+        <source src="/video.mp4" type="video/mp4">
+        <source src="/video.ogg" type="video/ogg">
+        Your browser does not support the video tag.
+    </video>
+    <br>
+    <button type="button" >button</button>
+        </body>
+    <details>
+        <summary>Details</summary>  
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod distinctio blanditiis ex. Dolor dolore voluptate totam? Voluptates itaque quasi, dicta ratione nulla dolor est et incidunt, deserunt veritatis aliquam quo.    </p>
+    </details>
+    <dl>
+        <dt>Home</dt>
+        <dd>Welcome</dd>
+    </dl>
 
 </html>

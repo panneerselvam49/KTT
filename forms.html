@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,24 +8,42 @@
     <title>Document</title>
 </head>
 <body>
-    <input list="names" name="browser">
-    <datalist id="names">
-    <option value="Alice">
-    <option value="Bob">
-    <option value="Charlie">
-    <option value="David">
-</datalist>
-    <select name="" id="" multiple>
-        <option value="">Apple</option>
-        <option value="">Apple</option>
-        <option value="">Apple</option>
-        <option value="">Apple</option>
-        <option value="">Apple</option>
-        <option value="">Apple</option>
-    </select><br>
-    <!-- <input type="text" minlength="3" maxlength="6" placeholder="name">
-    <input type="submit"> -->
-    <input type="text" maxlength="5" minlength="3">
-    <input type="submit">
+    <table border="1" style="text-align: center;">
+        <colgroup>
+            <col span="4" >
+        </colgroup>
+        <thead>
+        <tr>
+            <th><img src="/Images/cap.jpeg" width="30px" height="20 ">Device</th>
+            <th>Brand</th>
+            <th colspan="2">Spec</th>
+        </tr>
+    </thead>
+    <tr>
+        <td rowspan="3">Smartphone</td>
+        <td rowspan="3">Apple</td>
+        <th>Model</th>
+        <th>Storage</th>
+    </tr>
+    <tr>
+        <td>iphone 12pro</td>
+        <td>256GB</td>
+    </tr>
+    <tr>
+        <td>iphone SE</td>
+        <td>120GB</td>
+    </tr>
+    <tr>
+        <td>Laptops</td>
+        <td>HP</td>
+        <td colspan="2">15.6" display</td>
+    </tr>
+    <tr>
+        <td>Tablets</td>
+        <td>Samsung</td>
+        <td colspan="2">10.6" display</td>
+    </tr>
+    </table>
+    
 </body>
 </html>
