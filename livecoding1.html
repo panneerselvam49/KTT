@@ -8,7 +8,8 @@
     <body>
         <form action="">
             <fieldset>
-            <legend>Student Details</legend>
+            <fieldset>
+                <legend style="text-align: center;">Personal Information</legend>
             <h3>Note: Field with (*) must be filled</h3>
             <h3>Note: Students who are studied in Diploma they simply put 0 in mark field also applicable to HSC students</h3>
             
@@ -56,6 +57,10 @@
             <label for="re">Other Nationality: </label><br>
             <input type="text" placeholder="If other Nationality" id="re"><br><br>
 
+        </fieldset>
+
+        <fieldset>
+            <legend style="text-align: center;">Education Details</legend>
             <label for="edubo">10th Education medium: *</label><br>
             <input list="board" placeholder="Board of 10th Education" id="edubo" required>
             <datalist id="board">
@@ -75,6 +80,9 @@
 
             <label for="pso">10th Passed Out Month: *</label><br>
             <input type="month" placeholder="10th Passed out Month" id="pso"><br><br>
+
+            <label for="10m">Upload your SSLC marksheet: *</label><br>
+            <input type="file" id="10m" placeholder="10th marksheet" required><br><br>
 
             <label for="high">HSC/Diploma: *</label><br>
             <select id="high">
@@ -99,6 +107,9 @@
                 <option value="Metric">
                 <option value="State Board">
             </datalist><br>
+
+            <label for="12m">Upload your HSC Marksheet: *</label><br>
+            <input type="file" placeholder="Upload your 12th marksheet photo" required><br><br>
 
             <label for="12th">If 12th mark in number out of 600: *</label><br>
             <input type="number" placeholder="12th mark in numbers" id="12" required><br><br>
@@ -138,6 +149,9 @@
 
             <label for="dur">Course Duration: *</label><br>
             <input type="number" id="dur" max="3" min="3" required><br><br>
+
+            <label for="dipm">Upload your Diploma Consolidated marksheet: </label><br>
+            <input type="file" placeholder="Diploma marksheet consolidated"><br><br>
             
             <label for="fg">First Graduate: </label><br>
             <label for="fg">Yes: </label>
@@ -146,13 +160,17 @@
             <label for="fgn">No: </label>
             <input type="radio" name="fg" id="fgn"><br><br>
 
-            <label for="cj">How you Joined: *</label><br>
+            <label for="cj">How you prefer Join: *</label><br>
             <select name="" id="" required>
                 <option value="">7.5%</option>
                 <option value="">Counselling</option>
                 <option value="">Sports Quota</option>
             </select><br><br>
 
+            </fieldset>
+
+            <fieldset>
+                <legend style="text-align: center;">Parent's Details & other Details</legend>
             <label for="fn">Father's Name: *</label><br>
             <input type="text" placeholder="Father's Name" id="fn" required><br><br>
 
@@ -192,9 +210,9 @@
 
             <input type="checkbox" id="dif">        
             <label for="dif">Disabled Physically</label><br><br>
-
             <input type="submit">
             <input type="reset">
+        </fieldset>
         </fieldset>
         </form>
     </body>
