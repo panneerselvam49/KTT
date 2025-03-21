@@ -1,187 +1,201 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Details Form</title>
-</head>
-<body>
-    <form action="">
-        <fieldset>
-        <legend>Student Details</legend>
-        <h3>Note: Field with (*) must be filled</h3>
-        <h3>Note: Students who are studied in Diploma they simply put 0 in mark field also applicable to HSC students</h3>
-        
-        <label for="photo">Upload Student photo: *</label><br>
-        <input type="file" id="photo"><br><br>
-        
-        <label for="name">Student Name: *</label><br>
-        <input type="text" placeholder="Enter your name" id="name" required><br><br>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Student Details Form</title>
+    </head>
+    <body>
+        <form action="">
+            <fieldset>
+            <legend>Student Details</legend>
+            <h3>Note: Field with (*) must be filled</h3>
+            <h3>Note: Students who are studied in Diploma they simply put 0 in mark field also applicable to HSC students</h3>
+            
+            <label for="photo">Upload Student photo: *</label><br>
+            <input type="file" size="100kb" id="photo"><br><br>
+            
+            <label for="name">Student Name: *</label><br>
+            <input type="text" placeholder="Enter your name" id="name" required><br><br>
 
-        <label for="DOB">Date Of Birth: *</label><br>
-        <input type="date" placeholder="Enter your Date of Birth" id="DOB" required><br><br>
+            <label for="DOB">Date Of Birth: *</label><br>
+            <input type="date" placeholder="Enter your Date of Birth" id="DOB" required><br><br>
 
-        <label for="label">Blood Group: *</label><br>
-        <input type="text" placeholder="Blood Group" id="blood" required><br><br>
+            <label for="label">Blood Group: *</label><br>
+            <input type="text" placeholder="Blood Group" id="blood" required><br><br>
 
-        <label for="addr">Address: *</label><br>
-        <input type="text" placeholder="Home Address" id="addr" required><br><br>
+            <label for="addr">Address: *</label><br>
+            <input type="text" placeholder="Home Address" id="addr" required><br><br>
 
-        <label for="mob">Student Mobile number: *</label><br>
-        <input type="tel" placeholder="Enter your mobile number" id="mob" min="7" max="12" required><br><br>
+            <label for="mob">Student Mobile number: *</label><br>
+            <input type="tel" placeholder="Enter your mobile number" id="mob" min="7" max="12" required><br><br>
 
-        <label for="anum">Student Aadhar Number: *</label><br>
-        <input type="number" placeholder="Student Aadhar number" id="anum" required><br><br>
+            <label for="anum">Student Aadhar Number: *</label><br>
+            <input type="number" placeholder="Student Aadhar number" id="anum" required><br><br>
 
-        <label for="mail">Student Email: *</label><br>
-        <input type="email" placeholder="Enter your email" id="mail" required><br><br>
+            <label for="mail">Student Email: *</label><br>
+            <input type="email" placeholder="Enter your email" id="mail" required><br><br>
 
-        <label for="gender" >Select Gender: *</label><br>
-        <input type="radio" id="gender" name="gend" required>
-        <label for="gender">Male</label>
-        <input type="radio" id="gen" name="gend" required>
-        <label for="gen">Female</label><br><br>
+            <label for="gender" >Select Gender: *</label><br>
+            <input type="radio" id="gender" name="gend" required>
+            <label for="gender">Male</label>
+            <input type="radio" id="gen" name="gend" required>
+            <label for="gen">Female</label><br><br>
 
-        <label for="age">Student Age</label><br>
-        <input type="number" placeholder="Student Age:" required id="age" min="17" max="30"><br><br>
+            <label for="age">Student Age</label><br>
+            <input type="number" placeholder="Student Age:" required id="age" min="17" max="30"><br><br>
 
-        <label for="reg">Nationality: *</label><br>
-        <select id="reg">
-            <option value="">Hindu</option>
-            <option value="">Christian</option>
-            <option value="">Muslim</option>
-            <option value="">Others</option>
-        </select><br><br>
+            <label for="reg">Nationality: *</label><br>
+            <select id="reg">
+                <option value="">Hindu</option>
+                <option value="">Christian</option>
+                <option value="">Muslim</option>
+                <option value="">Others</option>
+            </select><br><br>
 
-        <label for="re">Other Nationality: </label><br>
-        <input type="text" placeholder="If other religion" id="re"><br><br>
+            <label for="re">Other Nationality: </label><br>
+            <input type="text" placeholder="If other Nationality" id="re"><br><br>
 
-        <label for="edubo">10th Education medium: *</label><br>
-        <input list="board" placeholder="Board of 10th Education" id="edubo" required>
-        <datalist id="board">
-            <option value="CBSE">
-            <option value="Metric">
-            <option value="State Board">
-        </datalist><br><br>
+            <label for="edubo">10th Education medium: *</label><br>
+            <input list="board" placeholder="Board of 10th Education" id="edubo" required>
+            <datalist id="board">
+                <option value="CBSE">
+                <option value="Metric">
+                <option value="State Board">
+            </datalist><br><br>
 
-        <label for="schl">10th School Name: *</label><br>
-        <input type="text" placeholder="SSLC School name" id="schl" required><br><br>
+            <label for="schl">10th School Name: *</label><br>
+            <input type="text" placeholder="SSLC School name" id="schl" required><br><br>
 
-        <label for="10mark">10th Mark in number: *</label><br>
-        <input type="number" placeholder="Enter your 10th mark in integer" id="10mark" required><br><br>
+            <label for="10mark">10th Mark in number: *</label><br>
+            <input type="number" placeholder="Enter your 10th mark in integer" id="10mark" required><br><br>
 
-        <label for="10per">10th Percentage: *</label><br>
-        <input type="number" placeholder="10th Percentage" id="10per" required><br><br>
+            <label for="10per">10th Percentage: *</label><br>
+            <input type="number" placeholder="10th Percentage" id="10per" required><br><br>
 
-        <label for="pso">10th Passed Out Month: *</label><br>
-        <input type="month" placeholder="10th Passed out Month" id="pso"><br><br>
+            <label for="pso">10th Passed Out Month: *</label><br>
+            <input type="month" placeholder="10th Passed out Month" id="pso"><br><br>
 
-        <label for="high">HSC/Diploma: *</label><br>
-        <select id="high">
-            <option value="">12th</option>
-            <option value="">Diploma</option>
-        </select><br><br>
+            <label for="high">HSC/Diploma: *</label><br>
+            <select id="high">
+                <option value="">12th</option>
+                <option value="">Diploma</option>
+            </select><br><br>
 
-        <label for="edubor">12th Board of Education: </label><br>
-        <input list="boardr" placeholder="Board of Education" id="edubor" required><br><br>
+            <label for="edubor">12th Board of Education: </label><br>
+            <input list="boardr" placeholder="Board of Education" id="edubor" required><br><br>
 
-        <label for="dom">12th Department: *</label><br>
-        <select id="dom">
-            <option value="">Maths Biology</option>
-            <option value="">Computer Science</option>
-        </select><br><br>
+            <label for="dom">12th Department: *</label><br>
+            <select id="dom">
+                <option value="">Maths Biology</option>
+                <option value="">Computer Science</option>
+            </select><br><br>
 
-        <label for="cut">12th Cut-off: *</label><br>
-        <input type="number" placeholder="Cut-off" id="cut"><br>
+            <label for="cut">12th Cut-off: *</label><br>
+            <input type="number" placeholder="Cut-off" id="cut"><br>
 
-        <datalist id="boardr">
-            <option value="CBSE">
-            <option value="Metric">
-            <option value="State Board">
-        </datalist><br>
+            <datalist id="boardr">
+                <option value="CBSE">
+                <option value="Metric">
+                <option value="State Board">
+            </datalist><br>
 
-        <label for="12th">If 12th mark in number out of 600: *</label><br>
-        <input type="number" placeholder="12th mark in numbers" id="12" required><br><br>
+            <label for="12th">If 12th mark in number out of 600: *</label><br>
+            <input type="number" placeholder="12th mark in numbers" id="12" required><br><br>
 
-        <label for="12th">12th passed out:</label><br>
-        <input type="month" placeholder="12th Passed out month" id="12th"><br><br>
+            <label for="12th">12th passed out:</label><br>
+            <input type="month" placeholder="12th Passed out month" id="12th"><br><br>
 
-        <label for="dc">If Diploma College Name: *</label><br>
-        <input type="text" placeholder="Diploma College Name" id="dc"><br><br>
+            <label for="dc">If Diploma College Name: *</label><br>
+            <input type="text" placeholder="Diploma College Name" id="dc"><br><br>
 
-        <label for="dd">Board of Diploma: *</label><br>
-        <select id="dd">
-            <option value="">Dote</option>
-            <option value="">Autonomous</option>
-        </select><br><br>
+            <label for="dd">Board of Diploma: *</label><br>
+            <select id="dd">
+                <option value="">Dote</option>
+                <option value="">Autonomous</option>
+            </select><br><br>
 
-        <label for="dep">Diploma Department: *</label><br>
-        <input list="dept" id="dep" required><br><br>
+            <label for="dep">Diploma Department: *</label><br>
+            <input list="dept" id="dep" required><br><br>
 
-        <datalist id="dept">
-            <option value="CSE">
-            <option value="MECH">
-            <option value="ECE">
-            <option value="IT">
-            <option value="AI&DS">
-            <option value="EEE">
-        </datalist>
+            <datalist id="dept">
+                <option value="CSE">
+                <option value="MECH">
+                <option value="ECE">
+                <option value="IT">
+                <option value="AI&DS">
+                <option value="EEE">
+            </datalist>
 
-        <label for="dip">Diploma marks in percentage: *</label><br>
-        <input type="number" placeholder="Diploma details in Marks" id="dip" required><br><br>
+            <label for="dip">Diploma marks in percentage: *</label><br>
+            <input type="number" placeholder="Diploma details in Marks" id="dip" required><br><br>
 
-        <label for="dj">Joined Date</label><br>
-        <input type="date" placeholder="Joined Date" id="dj" required><br><br>
+            <label for="dj">Joined Date</label><br>
+            <input type="date" placeholder="Joined Date" id="dj" required><br><br>
 
-        <label for="ed">End Date: *</label><br>
-        <input type="date" placeholder="End Date" id="ed" required><br><br>
+            <label for="ed">End Date: *</label><br>
+            <input type="date" placeholder="End Date" id="ed" required><br><br>
 
-        <label for="dur">Course Duration: *</label><br>
-        <input type="number" id="dur" max="3" min="3" required><br><br>
+            <label for="dur">Course Duration: *</label><br>
+            <input type="number" id="dur" max="3" min="3" required><br><br>
+            
+            <label for="fg">First Graduate: </label><br>
+            <label for="fg">Yes: </label>
+            <input type="radio" id="fg" name="fg">
 
-        <label for="fn">Father's Name: *</label><br>
-        <input type="text" placeholder="Father's Name" id="fn" required><br><br>
+            <label for="fgn">No: </label>
+            <input type="radio" name="fg" id="fgn"><br><br>
 
-        <label for="mom">Mother's Name: *</label><br>
-        <input type="text" placeholder="Enter your Mother's name" id="mom" required><br><br>
+            <label for="cj">How you Joined: *</label><br>
+            <select name="" id="" required>
+                <option value="">7.5%</option>
+                <option value="">Counselling</option>
+                <option value="">Sports Quota</option>
+            </select><br><br>
 
-        <label for="fo">Father's Occupation: *</label><br>
-        <input type="text" placeholder="Father's Occupation" id="fo" required><br><br>
+            <label for="fn">Father's Name: *</label><br>
+            <input type="text" placeholder="Father's Name" id="fn" required><br><br>
 
-        <label for="mo">Mother's Occupation: *</label><br>
-        <input type="text" placeholder="Mother's Occupation" id="mo" required><br><br>
+            <label for="mom">Mother's Name: *</label><br>
+            <input type="text" placeholder="Enter your Mother's name" id="mom" required><br><br>
 
-        <label for="pnum">Parents Number: *</label><br>
-        <input type="tel" placeholder="Enter your Parents number" id="pnum" required><br><br>
+            <label for="fo">Father's Occupation: *</label><br>
+            <input type="text" placeholder="Father's Occupation" id="fo" required><br><br>
 
-        <label for="emer">Emergency Contact Name: *</label><br>
-        <input type="text" placeholder="Emergency Contact Name" id="emerName" required><br><br>
+            <label for="mo">Mother's Occupation: *</label><br>
+            <input type="text" placeholder="Mother's Occupation" id="mo" required><br><br>
 
-        <label for="emer">Emergency Contact Number: *</label><br>
-        <input type="number" placeholder="Emergency Contact Number" id="emerNum" required><br><br>
+            <label for="pnum">Parents Number: *</label><br>
+            <input type="tel" placeholder="Enter your Parents number" id="pnum" required><br><br>
 
-        <label for="residence">Residential Status: *</label><br>
-        <select id="residence">
-            <option value="">On-campus</option>
-            <option value="">Off-campus</option>
-            <option value="">Other</option>
-        </select><br><br>
+            <label for="emer">Emergency Contact Name: *</label><br>
+            <input type="text" placeholder="Emergency Contact Name" id="emerName" required><br><br>
 
-        <label for="skills">Special Skills/Interests:</label><br>
-        <textarea id="skills" placeholder="Mention any special skills or interests"></textarea><br><br>
+            <label for="emer">Emergency Contact Number: *</label><br>
+            <input type="number" placeholder="Emergency Contact Number" id="emerNum" required><br><br>
 
-        <label for="scholarship">Scholarships/Financial Aid:</label><br>
-        <input type="text" id="scholarship" placeholder="If applicable, mention the scholarship"><br><br>
+            <label for="residence">Residential Status: *</label><br>
+            <select id="residence">
+                <option value="">On-campus</option>
+                <option value="">Off-campus</option>
+                <option value="">Other</option>
+            </select><br><br>
 
-        <label for="socialMedia">Social Media Links:</label><br>
-        <input type="url" id="socialMedia" placeholder="Social media links"><br><br>
+            <label for="skills">Special Skills/Interests:</label><br>
+            <textarea id="skills" placeholder="Mention any special skills or interests"></textarea><br><br>
 
-        <input type="checkbox" id="dif">        
-        <label for="dif">Disabled Physically</label><br><br>
+            <label for="scholarship">Scholarships/Financial Aid: *</label><br>
+            <input type="text" id="scholarship" placeholder="If applicable, mention the scholarship" required><br><br>
 
-        <input type="submit">
-        <input type="reset">
-    </fieldset>
-    </form>
-</body>
-</html>
+            <label for="socialMedia">Social Media Links:</label><br>
+            <input type="url" id="socialMedia" placeholder="Social media links"><br><br>
+
+            <input type="checkbox" id="dif">        
+            <label for="dif">Disabled Physically</label><br><br>
+
+            <input type="submit">
+            <input type="reset">
+        </fieldset>
+        </form>
+    </body>
+    </html>
