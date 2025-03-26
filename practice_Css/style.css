@@ -1,0 +1,159 @@
+*{
+    font-family: 'Times New Roman', Times, serif;
+    padding: 10px;
+}
+#p{
+    background-color: aqua;
+    color: black;
+}
+.p{
+    background-color: aqua;
+    color: black;
+}
+.op{
+    background-color: powderblue;
+    opacity: 0.6;
+}
+.rgba{
+    background-color: rgba(10, 15, 20, 0.4);
+}
+.bgi{
+    background-image: url(/Images/22fddf3c7da4c4f4.webp);
+    opacity: 0.4;
+    /* background-repeat: no-repeat; */
+    background-position: top left;
+    background-attachment: scroll;
+}
+.bgi p{
+    background-color: aqua;
+}
+/* .bgi{
+    background: url(/Images/22fddf3c7da4c4f4.webp) no-repeat scroll top right no-repeat;
+} */
+#p1{
+    border-left: 10px solid peachpuff;
+}
+#p2{
+    border-right: 10px solid blue
+}
+#p3{
+    border-bottom: 5px solid tomato;
+}
+#p4{
+    border-top: 5px solid plum;
+}
+#p5{
+    border: 5px solid slategray;
+}
+#p6{
+    padding: 30px;
+    border: 3px solid gray;
+    text-align: center;
+}
+.mx{
+    display: inline-block;
+    background-color: burlywood; 
+    max-width: 300px; 
+    width:300px;
+    border-left: 50px;
+}
+#mo{
+    border: 2px solid black;
+    outline: 4px dotted green;
+    text-align: center;
+}
+body{
+    font-family: Playfair Display, serif;
+}
+a:link{
+    color: brown;
+}
+a:visited{
+    color: yellow;
+}
+a:hover{
+    color: blueviolet;
+}
+a:active{
+    color: blue;
+}
+ul li{
+    list-style-type: lower-roman;
+}
+ol li{
+    list-style-type: disc;
+}
+#l2 li{
+    list-style-type: upper-roman;
+}
+#l4 li{
+    list-style-type: upper-alpha;
+}
+#l5 li{
+    list-style-type: square;
+}
+#l6 li{
+    list-style-type: none;
+}
+#l8 li{
+    list-style-position: inside;
+}
+#l9 li{
+    list-style-position: outside;
+}
+#l7 li{
+    list-style-type: lower-latin;
+}
+tr :nth-child(odd){
+    background-color: black;
+    color: white;
+}
+#mv1:hover{
+    display: inline-block;
+    position: relative;
+    left: 10%;
+    right: -10%;
+}
+.pse1{
+    background-color: aquamarine;
+    text-align: center;
+}
+.pse1:hover{
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
+#pse2 p{
+    display: none;
+    background-color: aqua;
+    padding: 10px;
+}
+#pse2:hover p{
+    display: block;
+    cursor: pointer;
+}
+.tan1{
+    width: 100px;
+    height: 100px;
+    background-color: green;
+    /* transition: width 2s, height 3s; */
+    transition: 3s ease-in-out;
+}
+.tan1:hover{
+    width: 200px;
+    height: 100px;
+} 
+#t2{
+    width: 200px;
+    height: 200px;
+    background-color: blue;
+    transition: 3s ease-in-out;
+}
+#t2:hover{
+    /* transform: rotate(120deg); */
+    /* transform: scale(1.1); */
+    /* transform: skew(20deg); */
+    /* transform: matrix(1, -0.3, 0, 1, 0, 0); */
+    transform: matrix(1, 0, 0.5, 1, 150, 0);
+    /* background-color: yellow; */
+}

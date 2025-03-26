@@ -1,0 +1,81 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        body {
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .moving {
+            font-size: 3vh;
+            font-weight: bold;
+            animation: updown 5s infinite;
+        }
+        @keyframes updown {
+            0% {
+                transform: translate(90vh, 0vh);
+            }
+            50%{
+                transform: translate(90vh, 95vh);
+            }
+            100%{
+                transform: translatex(-5vh, 70vh);
+            }
+            
+        }
+        .dv1 {
+            border: 2px solid black;
+            width: 1000px;
+            height: 500px;
+            position: relative;
+            overflow: hidden;
+            max-width: 1000px;
+        }
+    </style>
+    <div class="dv1">
+        <div class="moving">Up Down Right Up Down Pattern!!</div>
+    </div>
+</body>
+</html>-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <style>
+            #b1{
+                animation: traffic 9s  infinite;
+            }
+            #b2{
+                animation: traffic 6s linear  infinite;
+            }
+            #b3{
+                animation: traffic 3s linear infinite;
+            }
+            @keyframes traffic {
+                0%{
+                    transform: translate(0,0);
+                }
+                50%{
+                    transform: translateX(100vh) translateY(300px);
+                }
+                100%{
+                    transform: translatex(0) translateY(0)
+                }
+            }
+        </style>
+        <img src="/Images/glass-red-ball-precious-pearl-600nw-1788430664.webp" alt="Red ball" width="100px" height="100px" id="b1">
+        <img src="/Images/Yellow-ball-on-transparent-background-PNG.png" alt="Yellow ball" width="100px" height="100px" id="b2">
+        <img src="/Images/G03.jpg" alt="Green ball" width="100px" height="100px" id="b3">
+    </div>
+</body>
+</html>
