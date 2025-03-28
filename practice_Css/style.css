@@ -157,3 +157,52 @@ tr :nth-child(odd){
     transform: matrix(1, 0, 0.5, 1, 150, 0);
     /* background-color: yellow; */
 }
+.m1{
+    background-color: black;
+    color: white;
+    @media screen and (max-width:500px) {
+        background-color: violet;
+    }
+}
+.con1{
+    display: flex;
+    flex-wrap: wrap;
+}
+.mq1{
+    background-color: aquamarine;
+    height: 100px;
+    margin: 10px;
+    flex-basis: 20%;
+    flex-grow: 1;
+    float: left;
+    @media screen and (min-width:600px) {
+        flex-basis: 40%;
+    }
+    @media screen and (min-width: 900px) {
+        flex-basis: 100%;
+    }
+    @media screen and (min-width:100) {
+        flex-basis: 100%;
+    }
+
+}
+.grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 100px);
+    background-color: brown;
+    padding: 10px;
+}
+.grid > div{
+    background-color: aqua;
+    /* padding: 10px; */
+    display: flex;
+    border: 1px solid black;
+    align-items: center;
+    margin: 10px;
+    height: 50px;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    /* flex-basis: 50%; */
+}
