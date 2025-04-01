@@ -295,3 +295,8 @@
 //     }
 // }
 // ao('panneer',20);
+// function on(a) {
+//     alert(a??'value not defined')
+//         return ;
+// }
+// on()
