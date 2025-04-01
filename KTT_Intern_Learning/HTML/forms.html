@@ -3,21 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Form</title>
+    <title>Form with All Input Types</title>
 </head>
 <body>
-    <h2>Simple Contact Form</h2>
-    <form action="/submit_form" method="POST">
-        <label for="name">Name:</label><br>
-        <input type="text" id="name" name="name" required><br><br>
+    <h1>Form with All Input Types</h1>
+    <form action="#" method="POST">
+        
+        <!-- Text -->
+        <label for="text">Text:</label>
+        <input type="text" id="text" name="text"><br><br>
 
-        <label for="email">Email:</label><br>
-        <input type="email" id="email" name="email" required><br><br>
+        <!-- Password -->
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password"><br><br>
 
-        <label for="message">Message:</label><br>
-        <textarea id="message" name="message" rows="4" required></textarea><br><br>
+        <!-- Email -->
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email"><br><br>
 
+        <!-- Number -->
+        <label for="number">Number:</label>
+        <input type="number" id="number" name="number"><br><br>
+
+        <!-- Date -->
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date"><br><br>
+
+        <!-- Time -->
+        <label for="time">Time:</label>
+        <input type="time" id="time" name="time"><br><br>
+
+        <!-- Range -->
+        <label for="range">Range:</label>
+        <input type="range" id="range" name="range" min="0" max="100"><br><br>
+
+        <!-- Color -->
+        <label for="color">Color:</label>
+        <input type="color" id="color" name="color"><br><br>
+
+        <!-- Checkbox -->
+        <label for="checkbox">Checkbox:</label>
+        <input type="checkbox" id="checkbox" name="checkbox" value="yes"><br><br>
+
+        <!-- Radio -->
+        <label for="radio">Radio:</label>
+        <input type="radio" id="radio1" name="radio" value="option1"> Option 1
+        <input type="radio" id="radio2" name="radio" value="option2"> Option 2<br><br>
+
+        <!-- File -->
+        <label for="file">File:</label>
+        <input type="file" id="file" name="file"><br><br>
+
+        <!-- URL -->
+        <label for="url">URL:</label>
+        <input type="url" id="url" name="url"><br><br>
+
+        <!-- Tel -->
+        <label for="tel">Telephone:</label>
+        <input type="tel" id="tel" name="tel"><br><br>
+
+        <!-- Search -->
+        <label for="search">Search:</label>
+        <input type="search" id="search" name="search"><br><br>
+
+        <!-- Hidden -->
+        <input type="hidden" id="hidden" name="hidden" value="hidden_value"><br><br>
+
+        <!-- Submit -->
         <input type="submit" value="Submit">
+        
     </form>
 </body>
 </html>
