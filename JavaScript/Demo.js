@@ -211,3 +211,87 @@
 //     console.log(a);
 //     a++;
 // }
+// let user=prompt('Admin \nStudent');
+// if(user==null){
+//     alert('Canceled');
+// }
+// else if(user==='Admin'){
+//     let pro=prompt('Enter your password!');
+//     if(pro=='TheMaster'){
+//         alert('Welcome');
+//     }
+//     else if(pro==null){
+//         alert('Canceled');
+//     }
+//     else{
+//         alert('Password Incorrect');
+//     }
+// }
+// else{
+//     alert('Incorrect username');
+// }
+//loops
+//for loop
+// let i=0;
+// for(;i<=4;){
+//     console.log(i);
+//     i++;
+// }
+//while
+// let a=0
+// while(a<3){
+//     console.log(a);
+//     a++;
+// }
+//do while
+// let a=0;
+// do{
+//     console.log(a);
+//     a++;
+// }
+//     while(a<5);
+//for in loop
+// let obj={name:'panneer', lname:'selvam', age:20};
+// for(let ob in obj){
+//     console.log((ob)+':'+obj[ob]);
+// }
+//for of loop
+// let fru=['Apple', 'Banana', 'Cherry', 'Dragon Fruit'];
+// for(let fr of fru){
+//     console.log(fr);
+// }
+//Arrow function
+// let add=(a,b)=>a+b;
+// console.log(add(2,3))
+//object
+// let ob={name:'panneer', age:20, Adult:true};
+// console.log(ob.lname)
+// let ob={name:'panneer', age:20, Adult:true};
+// ob['edu med']='English';
+// console.log(ob);
+// let fr=prompt('Enter fruit','Mango');
+// let ob={
+//     [fr]:1,
+// }
+// console.log(ob.Mango);
+// function ao(name, age){
+//     return{
+//         name:name,
+//         age:age,
+//     }
+// }
+// ao('panneer',20);
+// function ao(name, age){
+//     return{
+//         name,
+//         age,
+//     }
+// }
+// ao('panneer',20);
+// function ao(name, age){
+//     return{
+//         name:name,
+//         age,
+//     }
+// }
+// ao('panneer',20);
