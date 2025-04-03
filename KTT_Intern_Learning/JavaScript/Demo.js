@@ -300,3 +300,115 @@
 //         return ;
 // }
 // on()
+// function name() {
+//     return{
+//         name:'panneer',
+//         last_name:'selvam',
+//         age:20,
+//     };
+// }
+// let re=name();
+// console.log(re.age);
+//Object copy
+// let obj={name:'panneer', age:20};
+// obj.lname='selvam';
+// obj['edu med']='English'
+// console.log(obj);
+// delete obj.age;
+// console.log(obj);
+// let ob={name:'kjf', age:21};
+// let bn=ob;
+// bn.hj='hello';
+// console.log(bn.age);
+// console.log(bn);
+// let bm={};
+// bm.hj='jkdf';
+// console.log(bm);
+// let bm={};
+// bm.hj_bn='jkdf';
+// console.log(bm);
+// let bh={};
+// bh['hj_bn']='jkdf';
+// console.log(bm);
+//Cloning Object
+// let kl={name:'panneer', age:20, lname:'selvam'};
+// let gh={};
+// for(let k of Object.keys(kl)){
+//     gh[k]=kl[k];
+// }
+// gh.name='selvam';
+// gh.lname='panneer';
+// console.log(gh);
+// let a={adult:true};
+// let b={bachelor:true};
+// let df={name:'panneer'};
+// Object.assign(a,b,df);
+// console.log(a.adult);
+// let jn={name:'abc'};
+// Object.assign(jn,{name:'xyz'});
+// console.log(jn);
+// let ty={name:'jsdf'};
+// let clo=Object.assign({},ty);
+// console.log(clo);
+//  let us={
+//     name:'panneer',
+//     user:{
+//         Education:'B.E',
+//         specilization:'ECE',
+//         Join:2023,
+//         Graduation:2025,
+//     }
+//  };
+//  console.log(us);
+//  let dup=Object.assign({},us);
+// dup.user.Education='B.Tech';
+//  console.log(dup);
+//  console.log(us.name==dup.name);
+//  console.log(us);
+//  console.log(dup);
+// console.log(us==dup);
+//  let us={
+//          name:'panneer',
+//          user:{
+//              Education:'B.E',
+//              specilization:'ECE',
+//              Join:2023,
+//              Graduation:2025,
+//          }
+//       };
+//       let co=structuredClone(us);
+//       console.log(us.name===co.name);
+//Primary functiom
+// function name() {
+//     return 10+10;
+// }
+// let a=name();
+// a;
+//constructor to create object
+// function df(a,b){
+//     this.a=a;
+//     this.b=b;
+//     this.greet=function(){
+//         let su=a+b;
+//         console.log('sum of two numbers: '+su);
+//     };
+// }
+// let u=new df(10,10);
+// console.log(u.a);
+// u.greet()
+// for(let i=0;i<3;i++){
+//     for(let j=0;j<2;j++){
+//         for(let l=0;l<1;l++){
+//             console.log(i);
+//         }
+//     }
+// }
+//Oject.crearte method
+// let p={
+//     greet:function(){
+//         console.log('this is obj create');
+//     }
+// }
+// let y=Object.create(p);
+// y.name='panneer';
+// console.log(y);
