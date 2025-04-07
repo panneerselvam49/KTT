@@ -145,13 +145,45 @@ fe.forEach(item=>{
 });
 console.log(fe.indexOf('selvam'));
 
-let si=[20];
-si[2]=3;
-si[5]=5;
-si[15]=2;
-for(let key of si){
-    if(key!=undefined){
-        si.push(key);
-    }
-}
-console.log(si);
+// let si=[20];
+// si[2]=3;
+// si[5]=5;
+// si[15]=2;
+// for(let key of si){
+//     if(key!=undefined){
+//         si.push(key);
+//     }
+// }
+// console.log(si);
+
+let searcharray=[{
+    id:12,
+    name:'panneer',
+}];
+console.log(searcharray.find(item=>item.id==12));
+
+let arraymap=['panneer', 'selvam'];
+console.log(arraymap.map(map=>map.length));
+
+let arrayslpit='Hello I\'m panneer'.split(' ');
+console.log(arrayslpit);
+
+let sum=[1,2,3,4,5];
+let res=sum.reduce((r1,last)=>r1+last,0);
+console.log(res);
+
+
+let s1=[1,2,3,4,5];
+s1.pop();
+let re=s1.reduce((r1,last)=>r1+last);
+console.log(re);
+
+let users = [
+    {id: 1, name: "John"},
+    {id: 2, name: "Pete"},
+    {id: 3, name: "Mary"}
+  ];
+  
+  let someUsers = users.filter(item => item.id < 3);
+  
+  alert(someUsers.length);
