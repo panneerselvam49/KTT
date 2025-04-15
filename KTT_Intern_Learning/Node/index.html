@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <fieldset>
+            <legend>Details</legend>
+            <br>
+            <input type="text" id="name" placeholder="Enter your name">
+            <br>
+            <input type="email" id="email" placeholder="Email">
+            <br>
+            <input type="password" id="password" placeholder="Password">
+            <br>
+            <button onclick="submitForm()">Submit</button>
+        </fieldset>
+    </div>
+
+    <script>
+        async function submitForm() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            const response = await fetch('/api/items', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ name, email, password }),
+            });
+
+            const result = await response.json();
+            alert(result.message);
+        }
+    </script>
+</body>
+</html>
