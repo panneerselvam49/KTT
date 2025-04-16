@@ -1,18 +1,14 @@
 {
     "sqltools.connections": [
         {
-            "mysqlOptions": {
-                "authProtocol": "default",
-                "enableSsl": "Disabled"
-            },
             "previewLimit": 50,
-            "server": "localhost",
-            "port": 3306,
-            "driver": "MySQL",
-            "name": "KTT_Learning_MYSQL",
-            "database": "KTT_learning",
-            "username": "Panneerselvam",
-            "askForPassword": true
+            "server": "127.0.0.1",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "postgres",
+            "database": "postgres",
+            "username": "postgres",
+            "password": "Paneer@123"
         }
     ]
 }

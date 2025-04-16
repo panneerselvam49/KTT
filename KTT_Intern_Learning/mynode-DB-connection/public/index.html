@@ -35,14 +35,11 @@
 
                 if (response.ok) {
                     const data = await response.json();
-                    alert(`User  created: ${data.name} (${data.email})`);
-                    document.getElementById('userForm').reset(); // Reset the form
+                    document.getElementById('userForm').reset();
                 } else {
-                    alert('Error creating user');
                 }
             } catch (error) {
                 console.error('Error:', error);
-                alert('Error creating user');
             }
         });
     </script>
