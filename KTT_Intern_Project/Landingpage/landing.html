@@ -8,12 +8,20 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
   <link rel="stylesheet" href="landingpage.css">
 </head>
 <body>
+
+  <script src="landingpage.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
   <nav class="headernav">
     <div><a href="#" style="font-weight: 900;">Calendar</a></div>
-    <div><a href="#">Visits</a></div>
+    <div><a href="#" id="visittable">Visits</a></div>
     <div><a href="#">Dashboard</a></div>
   </nav>
 
@@ -30,7 +38,7 @@
       <div class="calendar-grid">
         <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
 
-        <div></div><div></div><div class="day">1 <span class="multiplemeets"></span></div><div class="day">2</div><div class="day">3</div><div class="day">4</div><div class="day">5</div>
+        <div></div><div></div><div class="day">1</div><div class="day">2</div><div class="day">3</div><div class="day">4</div><div class="day">5</div>
         <div class="day">6</div><div class="day">7</div><div class="day">8</div><div class="day completed">9</div><div class="day">10</div><div class="day">11</div><div class="day cancelled">12</div>
         <div class="day">13</div><div class="day">14</div><div class="day">15</div><div class="day">16</div><div class="day pending">17</div><div class="day">18</div><div class="day">19</div>
         <div class="day">20</div><div class="day">21</div><div class="day">22</div><div class="day today">23</div><div class="day">24</div><div class="day">25</div><div class="day completed">26</div>
@@ -326,7 +334,6 @@
     </div>
   </div>
 
-  <!-- Visit scheduling modal -->
   <div id="visit-modal" class="modal">
     <div class="modal-content">
       <div class="modal-header">
@@ -337,6 +344,24 @@
       <form id="visit-form">
         <div class="form-section">
           <h3>Visit Details</h3>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="visit-date">Employee ID:</label>
+              <input type="text" id="employeeid" placeholder="Enter your ID">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="visit-date">Assign to:</label>
+              <select id="formemp" disabled>
+                <option value="">611</option>
+                <option value="">613</option>
+                <option value="">615</option>
+              </select>
+            </div>
+          </div>
           
           <div class="form-row">
             <div class="form-group">
@@ -348,24 +373,7 @@
           <div class="form-row time-selection">
             <div class="form-group">
               <label for="visit-time">Start Time:</label>
-              <input type="text" id="visit-time" name="visitTime" readonly>
-            </div>
-            
-            <div class="form-group">
-              <label for="visit-duration">Duration:</label>
-              <select id="visit-duration" name="visitDuration" onchange="calculateEndTime()">
-                <option value="30">30 minutes</option>
-                <option value="60" selected>1 hour</option>
-                <option value="90">1.5 hours</option>
-                <option value="120">2 hours</option>
-                <option value="180">3 hours</option>
-                <option value="240">4 hours</option>
-              </select>
-            </div>
-            
-            <div class="form-group">
-              <label for="visit-end-time">End Time:</label>
-              <input type="text" id="visit-end-time" name="visitEndTime" readonly>
+              <input type="text" id="visit-time" name="visitTime">
             </div>
           </div>
           
@@ -391,42 +399,110 @@
             <input type="text" id="visit-location" name="visitLocation" placeholder="Enter meeting location" required>
           </div>
           
+          <div class="form-row">
+            <div class="form-group">
+              <label for="latitude">Latitude:</label>
+              <input type="text" id="latitude" name="latitude" placeholder="Latitude" readonly>
+            </div>
+          
+            <div class="form-group">
+              <label for="longitude">Longitude:</label>
+              <input type="text" id="longitude" name="longitude" placeholder="Longitude" readonly>
+            </div>
+          </div>
+          
           <div class="form-group">
-            <label for="visit-purpose">Purpose of Meeting:</label>
-            <textarea id="visit-purpose" name="visitPurpose" placeholder="Describe the purpose of this visit" rows="3" required></textarea>
+            <button type="button" onclick="openMapModal()" class="location-button">Choose Location on Map</button>
+          </div>
+
+          <div id="map-modal" class="fullscreen-map-modal">
+            <div class="map-header">
+              <h2>Select a Location</h2>
+              <span class="close-btn" onclick="closeMapModal()">&times;</span>
+            </div>
+            <div id="map" class="map-container"></div>
           </div>
           
           <div class="form-row">
-            <div class="form-group">
-              <label for="visit-status">Status:</label>
-              <select id="visit-status" name="visitStatus">
-                <option value="planned">Planned</option>
-                <option value="pending">Pending Confirmation</option>
-                <option value="confirmed">Confirmed</option>
-              </select>
+            <div class="form-row">
+              <div class="form-group" id="status-completed">
+                <label for="visit-status">Status:</label>
+                <select id="visit-status" name="visitStatus">
+                  <option value="planned">Planned</option>
+                  <option value="Cancelled">Cancelled</option>
+                  <option value="Completed">Completed</option>
+                </select>
+              </div>            
+              
+              <div class="form-group">
+                <label for="visit-priority">Priority:</label>
+                <select id="visit-priority" name="visitPriority">
+                  <option value="low">Low</option>
+                  <option value="medium" selected>Medium</option>
+                  <option value="high">High</option>
+                </select>
+              </div>
             </div>
             
-            <div class="form-group">
-              <label for="visit-priority">Priority:</label>
-              <select id="visit-priority" name="visitPriority">
-                <option value="low">Low</option>
-                <option value="medium" selected>Medium</option>
-                <option value="high">High</option>
-              </select>
+            <!-- Visit details section (initially hidden) -->
+            <div id="visits-completed" style="display: none;">
+              <label for="meeting-date">Visited Date:</label>
+              <input type="date" placeholder="Enter the visited date" id="meeting-date">
+              <label for="meeting-start-time">Meeting start time:</label>
+              <input type="datetime-local" placeholder="Meeting start time" id="meeting-start-time">
+              <label for="endtime">Meeting End time:</label>
+              <input type="datetime-local" placeholder="Enter Meeting End time" id="endtime">
+              
+              <div class="form-group">
+                <label for="visit-location">Location:</label>
+                <input type="text" id="visit-location" name="visitLocation" placeholder="Enter meeting location" required>
+              </div>
+              
+              <div class="form-group">
+                <button type="button" onclick="openMapModal()">Get Current Location</button>
+              </div>
+            
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="latitude">Latitude:</label>
+                  <input type="text" id="latitude" name="latitude" placeholder="Latitude" readonly>
+                </div>
+              
+                <div class="form-group">
+                  <label for="longitude">Longitude:</label>
+                  <input type="text" id="longitude" name="longitude" placeholder="Longitude" readonly>
+                </div>
+              </div>
+            </div>
+            <div class="form-actions">
+              <button type="button" class="cancel-btn" onclick="closeModal()">Cancel</button>
+              <button type="button" class="save-btn" onclick="saveVisit()">Save Visit</button>
             </div>
           </div>
-        </div>
-        
-        <div class="form-actions">
-          <button type="button" class="cancel-btn" onclick="closeModal()">Cancel</button>
-          <button type="button" class="save-btn" onclick="saveVisit()">Save Visit</button>
         </div>
       </form>
     </div>
   </div>
-  
   <div id="notification-container"></div>
 
-  <script src="landingpage.js"></script>
+  <table border="1" id="mytable">
+    <h2>Visits planned</h2>
+    <thead>
+      <tr>
+        <th>Employee Email</th>
+        <th>Company name</th>
+        <th>Client name</th>
+        <th>Client contact</th>
+        <th>Client working department</th>
+        <th>Data and time</th>
+        <th>Loaction</th>
+        <th>Purpose</th>
+        <th>Meeting start time</th>
+        <th>Meeting end time</th>
+        <th>Notes</th>
+        <th>Photos</th>
+      </tr>
+    </thead>
+  </table>
 </body>
 </html>
