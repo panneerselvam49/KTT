@@ -8,7 +8,7 @@ router.post('/reworkedform', async (req, res) => {
     return res.status(400).json({ success: false, message: 'Email and password are required' });
   }
   try {
-    const user = await User.findOne({ where: { email } });
+    const user = await User.findAll({ where: { email } });
     if (!user) {
       return res.status(401).json({ success: false, message: 'Invalid email or password' });
     }

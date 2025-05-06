@@ -10,11 +10,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', (req, res) => {
   res.send('Server is working correctly');
 });
-
 app.get('/reworkedform', (req,res)=>{
-  
 })
-
 app.listen(3000, () => {
   console.log('Server running on http://localhost:3000');
 });
