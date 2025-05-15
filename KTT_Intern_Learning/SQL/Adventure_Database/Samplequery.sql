@@ -187,3 +187,9 @@ where unique (select R.course_id
 from section as R
 where T.course id= R.course_id and
 R.year = 2017);
+
+//sub query from clause
+select dept_name, avg_salary
+from(select dept_name, avg(salary) as avg_salary from instructor group by dept_name) where avg_salary>42000;
+
+select dept_name, avg_salary from(select dept_name, avg(salary) from instructor group by dept_name)as dept_avg(dept_name, avg_salary) where avg_salry>42000;
