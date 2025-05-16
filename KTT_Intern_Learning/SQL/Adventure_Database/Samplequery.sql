@@ -188,8 +188,64 @@ from section as R
 where T.course id= R.course_id and
 R.year = 2017);
 
+//check unique attributes
+select T.course_id
+from course as T
+where unique (select R.course_id
+from section as R
+where T.course id= R.course_id and
+R.year = 2017);
+
+//not unique attributes 
+select T.course_id
+from course as T
+where not unique (select R.course_id
+from section as R
+where T.course id= R.course_id and
+R.year = 2017);
+
 //sub query from clause
 select dept_name, avg_salary
 from(select dept_name, avg(salary) as avg_salary from instructor group by dept_name) where avg_salary>42000;
 
 select dept_name, avg_salary from(select dept_name, avg(salary) from instructor group by dept_name)as dept_avg(dept_name, avg_salary) where avg_salry>42000;
+
+//with clause
+select max_budget(value)as(select max(budget) from department)select budget from department, max_budget where department.budget=max_budget.value;
+
+//scalar subqueries
+select dept_name,(select count(*)from instructor where department.dept_name=instructor.dept_name)as total_instructor from department;
+
+//modifications on tables
+update takes set grade='A+' where id='24932';
+
+//delete from relation
+delete from takes where course_id='559';
+
+//inserting new record
+insert into takes(id, course_id, sec_id, semester, year, grade) values('1212', '3434', '3', 'Fall', '2004, 'A);
+
+//natural join
+select * from takes natural join teaches limit 10;
+
+//name of student along with title who's taken course with two different table takes and course
+select name, title
+from student natural join takes, course
+where takes.course_id = course.course_id;
+
+//inner join
+select student.ID as ID, name, dept name, tot_cred,
+course_id, sec_id, semester, year, grade
+from student join takes on student.ID = takes.ID;
+
+//left join
+select * from student left join takes on student.ID = takes.ID;
+
+//right join
+select * from takes right join student on takes.ID = student.ID;
+
+//inner join other example
+select takes.semester, takes.year from takes inner join teaches on takes.course_id=teaches.course_id limit 4;
+
+//inner join used along with group by
+select count(takes.semester), takes.year from takes left join teaches on takes.course_id=teaches.course_id group by takes.year;
