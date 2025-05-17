@@ -1,4 +1,5 @@
---retrieving single attribute from the relation
+```sql
+retrieving single attribute from the relation
 select s_id from advisor; 
 
 --retrieving data from database without duplicate data
@@ -249,3 +250,18 @@ select takes.semester, takes.year from takes inner join teaches on takes.course_
 
 //inner join used along with group by
 select count(takes.semester), takes.year from takes left join teaches on takes.course_id=teaches.course_id group by takes.year;
+
+//two inner joins are used
+select i.id, i.name, i.dept_name from instructor as i inner join course as c on i.dept_name=c.dept_name inner join classroom on c.credits=classroom.capacity limit 3;
+
+select course_id, min(grade) from takes where grade=(select min(grade)from takes) group by course_id;
+
+select course_id, max(sec_id)from teaches group by course_id;
+
+select course_id, max(sec_id)from teaches where sec_id >=(select max(sec_id)from teaches where semester='Fall') group by course_id;
+
+select st.name, st.id from student as st inner join section on st.id=section.course_id limit 3;
+
+//to find maximum budget
+select * from department where budget=(select max(budget)from department);
+```
