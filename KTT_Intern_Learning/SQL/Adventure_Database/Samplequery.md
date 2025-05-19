@@ -264,4 +264,75 @@ select st.name, st.id from student as st inner join section on st.id=section.cou
 
 //to find maximum budget
 select * from department where budget=(select max(budget)from department);
+
+//Leetcode 1757 recyclable and low fat products
+select product_id from products where low_fats='Y' and recyclable='Y';
+
+//Leetcode 584 find customer referee
+select name from customer where referee_id!=2 or referee_id is null;
+
+//Leetcode 595 big countries
+select name,population, area from world where area>=3000000 or population>=25000000;
+
+//Leetcode 1148 articel view 1
+select distinct(viewer_id) as id from views
+where author_id=viewer_id;
+
+//Leecode 1683 invalid tweets
+select tweet_id from tweets where length(content)>15;
+
+//Leetcode 1378 replace employee id with unique identifier
+select emu.unique_id, emp.name from employees as emp
+left join employeeuni emu on emu.id=emp.id;
+
+//1068 product sales analysis 1
+select pr.product_name, sa.year, sa.price from product as pr
+inner join sales sa on pr.product_id=sa.product_id;
+
+//197 rising temperature
+select today.id from weather yes cross join weather today
+where today.recorddate-yes.recorddate=1
+and today.temperature>yes.temperature;
+
+//1581 customers who visited but did not make any transactions
+select vi.customer_id, count(*)as count_no_trans from visits as vi
+left join transactions as tra on vi.visit_id=tra.visit_id
+where tra.visit_id is null
+group by vi.customer_id;
+
+
+//607 Sales person
+select sp.name from salesperson sp
+where sales_id not in(
+    select sales_id from orders o 
+    inner join company c on c.com_id=o.com_id and c.name='RED'
+)
+
+//620 not boring movies
+select * from cinema where id%2!=0 and description not in('boring') order by rating desc;
+
+//570 managres with at least 5 direct reports
+select em.name from employee em
+inner join employee e1 on em.id=e1.managerId
+group by em.id, em.name
+having count(em.id)>=5;
+
+//577 employee bonus
+select em.name, bo.bonus from employee as em
+left join bonus as bo on em.empId=bo.empId
+where bo.bonus<1000 or bonus is null;
+
+//to find the latest employeepayhisory on humanresources schema on Adventureworks 
+ with payhistory as (
+ select *,
+ row_number() over (
+ partition by businessentityid
+ order by ratechangedate desc
+ ) as latestpay
+ from humanresources.employeepayhistory
+ where businessentityid in (122, 132, 142)
+ select *
+ from ranked_payhistory
+ where latestpay = 1;
+
 ```
