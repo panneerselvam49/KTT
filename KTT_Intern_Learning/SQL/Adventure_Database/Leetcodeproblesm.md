@@ -23,8 +23,334 @@ select distinct p1.email from duplicateemail p1 inner join duplicateemail p2 on 
 
 
 create table departmenthighestsalary(id int primary key, name varchar(100), salary int, departmentId int);
-CREATE TABLinsert into departmenthighestsalary values(1, 'joe', 50000, 1),(2, 'jack', 30000, 2), (3, 'panneer', 35000, 4), (4, 'ben', 45000, 1);
+insert into departmenthighestsalary values(1, 'joe', 50000, 1),(2, 'jack', 30000, 2), (3, 'panneer', 35000, 4), (4, 'ben', 45000, 1);
 INSERT 0 4
 leetcode=# select * from departmenthighestsalary;
 
+create table swapsalary 
+insert into swapsalary values(1, 'A', 'm', 2500), (2, 'B', 'f', 1500), (3, 'C', 'm', 3500), (4, 'D', 'f', 1000);
+update swapsalary set sex=case sex when 'm' then 'f' when 'f' then 'm' end;
+
+create table trianglejudgement(x int, y int, z int);
+insert into trianglejudgement values(13,11,10), (12,34,33), (10,45,9), (22,9,7);
+(select *, 'Yes' as triangle from trianglejudgement where(x + y > z) AND (y + z > x) and (z + x > y))
+union
+(select *, 'No' as triangle
+from trianglejudgement
+where (x + y <= z) or (y + z <= x) or (z + x <= y));
+
+create table risingtemperature(id int unique, recorddate date, temperature int);
+insert into risingtemperature values(1, '2015-01-01', 10), (2, '2015-01-02', 15), (3, '2015-01-03', 18), (4, '2015-01-04', 35);
+select today.id from risingtemperature yes cross join risingtemperature today where today.recorddate-yes.recorddate=1 and today.temperature>yes.temperature;
+
+create table employees_earning_more_than_managers(id int primary key, name varchar(50), salary int, managerId int);
+insert into employees_earning_more_than_managers values(1, 'Joe', 70000, 3), (2, 'Henry', 80000, 4), (3, 'Sam', 60000, null), (4, 'Max', 90000, null);
+inner join employees_earning_more_than_managers e2 on e1.id=e2.managerId
+where e1.salary<e2.salary;
+
+create table cwno_customers(id int primary key, name varchar(50));
+insert into cwno_customers values(1,'Joe'), (2,'Henry'), (3, 'Sam'), (4, 'Max');
+select * from(select name as Customers from cwno_customers where id not in(select customerId from cwno_orders))as Customers;
+
+
+CREATE TABLE game_play_analysis1 (
+player_id INT,
+device_id INT,
+event_date DATE,     
+games_played INT,
+PRIMARY KEY (player_id, event_date));
+insert into game_play_analysis1 values(1, 2, '2016-03-01', 5), (1, 2, '2016-05-02', 6), (2, 3, '2017-06-25', 1), (3, 1, '2016-03-02', 0), (3, 4, '2018-07-03', 5);
+select player_id, min(event_date) first_login from game_play_analysis1 group by player_id;
+
+create table employeebonus_employee(empId int, name varchar(50), supervisor int, salary int);
+insert into employeebonus_employee values(3, 'Brand', null, 4000), (1, 'John', 3, 1000), (2, 'Dan', 3, 2000),(4,'Thomas',3, 4000);
+
+create table employeebonus_bonus(empId int unique, bonus int);
+insert into employeebonus_bonus values(2,500), (4, 2000);
+
+select em.name, bo.bonus from employeebonus_employee as em
+left join employeebonus_bonus as bo on em.empId=bo.empId
+where bo.bonus<1000 or bonus is null;
+
+
+create table salesanalysis_product(product_id int primary key, product_name varchar(40), unit_price int);
+insert into salesanalysis_product values(1, 'S8' ,1000), (2, 'G4', 800), (3, 'iPhone', 1400);
+create table salesanalysis_sales(seller_id int, product_id int, buyer_id int, sales_date date, quantity int, price int);
+insert into salesanalysis values(1, 1, 1, '2019-01-21', 2, 2000), (1,2,2,'2019-02-17', 1, 800), (2,2,3,'2019-06-02',1,800),(3,3,4,'2019-05-13',2,2800);
+select p.product_id, p.product_name
+from salesanalysis_product p join salesanalysis_sales s using(product_id)
+group by p.product_id, p.product_name
+having min(s.sales_date) >= '2019-01-01' and max(s.sales_date) <= '2019-03-31';
+
+
+create table activeusers(user_id int, session_id int, activity_date date, activity_type varchar(20));
+insert into activeusers values(1,1,'2019-07-20', 'open_session'), (1,1,'2019-07-20','scroll_down'), (1,1,'2019-07-20','end_session'),(2,4,'2019-07-20', 'open_session');
+select activity_date as day, count(distinct user_id) as active_users from activeusers where activity_date between '2019-06-28' and '2019-07-27' group by activity_date;
+
+
+create table artice_views(article_id int, author_id int, viewer_id int, view_date date);
+insert into artice_views values(1,3,5,'2019-08-01'), (1,3,6,'2019-08-02'), (2,7,7,'2019-08-01'), (4,7,1,'2019-07-22');
+select distinct(viewer_id)as id from artice_views where author_id=viewer_id;
+
+
+create table reformatdept(id int, revenue int, month varchar(20), primary key(id, month));
+insert into reformatdept values(1, 8000, 'Jan'),(2,9000, 'Jan'), (3, 10000, 'Feb'), (1, 7000,'Feb'), (1, 6000, 'Mar');
+select id, sum(case when month='Jan' then revenue else null end)as Jan_Revenue,
+sum(case when month='Feb' then revenue else null end)as Feb_Revenue,
+sum(case when month='Mar' then revenue else null end)as Mar_Revenue,
+sum(case when month='Apr' then revenue else null end)as Apr_Revenue,
+sum(case when month='May' then revenue else null end)as May_Revenue,
+sum(case when month='Jun' then revenue else null end)as Jun_Revenue,
+sum(case when month='Jul' then revenue else null end)as Jul_Revenue,
+sum(case when month='Aug' then revenue else null end)as Aug_Revenue,
+sum(case when month='Sep' then revenue else null end)as Sep_Revenue,
+sum(case when month='Oct' then revenue else null end)as Oct_Revenue,
+sum(case when month='Nov' then revenue else null end)as Nov_Revenue,
+sum(case when month='Dec' then revenue else null end)as Dec_Revenue
+from reformatdept group by id;
+
+
+create table qqp(query_name varchar(40), result varchar(20), position int, rating int);
+insert into qqp values('Dog', 'Golden retriever' ,1,5), ('Dog', 'German shepherd', 2, 5), ('Dog', 'Mule' ,200, 1), ('Cat', 'Shirazi', 5, 2), ('Cat', 'Siamese', 3, 3);
+select query_name,
+round(avg(rating*1.0/position),2) as quality,
+round(avg(case when rating < 3 then 1 else 0 end)*100.0,2) as poor_query_percentage
+from qqp
+group by query_name;
+
+
+create table averagesellingprice_prices(product_id int, start_date date, end_date date, price int, primary key(product_id, start_date, end_date));
+insert into averagesellingprice_prices values(1, '2019-02-17', '2019-02-28', 5),(1, '2019-03-01', '2019-03-22', 20), (2,'2019-02-01', '2019-02-20',15), (2, '2019-02-21', '2019-03-31', 30);
+
+create table averagesellingprice_unitsold(product_id int, purchase_date date, units int);
+insert into averagesellingprice_unitsold values(1, '2019-02-25', 100),(1,'2019-03-01', 15), (2, '2019-02-10', 200),(2, '2019-03-22', 30);
+select p.product_id, case when sum(u.units) is null then 0 else round(sum(u.units * p.price) / sum(u.units)::numeric, 2) end as average_price
+from averagesellingprice_Prices p
+left join averagesellingprice_UnitSold u
+on u.product_id = p.product_id and u.purchase_date between p.start_date and p.end_date
+group by p.product_id;
+
+create table sne_students(student_id int primary key, student_name varchar(50));
+insert into sne_students values(1,'Alice'), (2,'Bob'), (13, 'John'), (6,'Alex');
+
+create table subjects(subject_name varchar(40) primary key);
+insert into subjects values('Math');
+insert into subjects values('Physics');
+insert into subjects values('Programming');
+
+create table examinations(student_id int, subject_name varchar(50));
+insert into examinations values(1,'Math'), (2,'Physics'), (6,'Physics'),(13,'Programming');
+insert into examinations values(1,'Math'), (2,'Physics'), (6,'Physics'),(13,'Programming');
+
+select s.student_id, s.student_name, su.subject_name, count(exam.student_id) attended_exams
+from sne_students s
+cross join subjects su
+left join examinations exam on s.student_id=exam.student_id and su.subject_name=exam.subject_name
+group by s.student_id, s.student_name, su.subject_name
+order by s.student_id, s.student_name, su.subject_name;
+
+
+create table orderinaperiod1327_products(product_id int primary key, product_name varchar(50), product_category varchar(50));
+insert into orderinaperiod1327_products values(1,'Leetcode Solutions', 'Book'), (2, 'Jewels of stringology', 'Book'), (3, 'HP', 'Laptop'), (4, 'Lenovo', 'Laptop'), (5, 'Leecode kit', 'T-shirt');
+
+create table orders(product_id int, order_date date, unit int);
+insert into orders values(1,'2020-02-05',60), (1,'2020-02-10', 70), (2,'2020-01-18', 30), (3, '2020-02-11',2), (4,'2020-03-01',20),(5,'2020-02-25', 50), (5, '2020-02-27',50);
+select pro.product_name, sum(ord.unit) as unit from orderinaperiod1327_products pro
+inner join orders ord using(product_id)
+where to_char(order_date, 'YYYY-MM') = '2020-02'
+group by pro.product_name, pro.product_id
+having sum(ord.unit)>=100;
+
+create table unique_identifire1378_employees(id int primary key, name varchar(50));
+insert into unique_identifire1378_employees values(1, 'Alice'), (7,'Bob'), (11, 'Meir'), (90,'Winstion'), (3, 'Jonathan');
+
+create table unique_identifier1378_employeeuni(id int, unique_id int, primary key(id, unique_id));
+insert into unique_identifier1378_employeeuni values(3, 1),(11,2),(90,3);
+
+select emu.unique_id, emp.name from unique_identifire1378_employees as emp
+left join unique_identifier1378_employeeuni emu on emu.id=emp.id;
+
+
+create table toptravellers_users(id int unique, name varchar(40));
+insert into toptravellers_users values(1, 'Alice'), (2,'Bob'),(3,'Alex'), (4, 'Donald'),(7, 'Lee'),(13, 'Jonathan'),(19, 'Elvis');
+
+create table toptravellers_rides(id int unique, user_id int, distance int);
+insert into toptravellers_rides values(1,1,120), (2,1,317), (3,3,222),(4,7,100), (5,13,312);
+select us.name, coalesce(sum(distance),0)as travelled_distance from toptravellers_users us
+left join toptravellers_rides ri on us.id=ri.user_id
+group by us.id, us.name
+order by travelled_distance desc, us.name asc;
+
+
+create table productbydate(sell_date date, product varchar(50));
+insert into productbydate values('2020-05-30', 'Headphone'), ('2020-06-01', 'Pencil'), ('2020-06-02','Mask'), ('2020-05-30','Basketball'), ('2020-06-01', 'Bible'), ('2020-06-02','Mask'), ('2020-05-30', 'T-shirt');
+select sell_date, count(distinct product)as num_sold,
+string_agg(distinct product, ',' order by product) products from productbydate
+group by sell_date
+order by sell_date;
+
+
+create table patientsconditions_patients(patient_id int primary key, patient_name varchar(50), condtitions varchar(50));
+insert into patientsconditions_patients values(1, 'Daniel', 'YFEV COUGH'), (2,'Alice','DIAB100 MYOP'), (3,'Bob', 'ACNE DIAB100'), (4,'George', 'ACNE DIAB100'), (5,'Alain','DIAB201');
+select * from patientsconditions_patients
+where condtitions like '% DIAB1%' or condtitions like 'DIAB1%';
+
+
+create table visits_1581(visit_id int, customer_id int);
+insert into visits_1581 values(1,23),(2,9),(4,30),(5,54),(6,96),(7,54), (8,54);
+
+create table transactions_1581(transaction_id int unique, visit_id int, amount int);
+insert into transactions_1581 values(2,5,310), (3,5,300), (9,5,200),(12,1,910),(13,2,970);
+select vi.customer_id, count(*)as count_no_trans from visits_1581 as vi
+left join transactions_1581 as tra on vi.visit_id=tra.visit_id
+where tra.visit_id is null
+group by vi.customer_id;
+
+
+create table users_1633(user_id int, user_name varchar(50));
+insert into users_1633 values(6,'Alice');
+insert into users_1633 values(2,'Bob');
+insert into users_1633 values(7,'Alex');
+
+create table register_1633(contest_id int, user_id int, primary key(contest_id, user_id));
+insert into register_1633 values(215, 6),(209, 2), (208, 2), (210, 6),(208,6),(209,7),(209, 6),(215,7),(208,7),(210, 2)(207,2),(210,7);
+select contest_id, round(count(distinct user_id)*100.0/(select count(*)from users_1633),2)as percentage
+from register_1633
+group by contest_id
+order by percentage desc, contest_id asc;
+
+
+create table fixname_1667(user_id int primary key, name varchar(50));
+insert into fixname_1667 values(1,'aLice'),(2,'bOB');
+select user_id, upper(left(name,1)) || lower(substring(name from 2))as name from fixname_1667 order by user_id;
+
+
+create table invalidtweets(tweer_id int primary key, content varchar(50));
+insert into invalidtweets values(1, 'Let us code'),(2,'More than fifteen chars are here!');
+select tweer_id from invalidtweets where length (content)>15;
+
+
+create table leadsandpartners(date_id date, make_name varchar(50), lead_id int, partner_id int);
+insert into leadsandpartners values('2020-12-8', 'toyota', 0, 1),('2020-12-8', 'toyota', 1, 0), ('2020-12-8', 'toyota', 1, 2), ('2020-12-8', 'toyota', 0,2), ('2020-12-8', 'toyota', 0, 1), ('2020-12-7','toyota', 0, 1), ('2020-12-7','honda', 0, 1),('2020-12-7','honda', 2, 1);
+select date_id, make_name, count(distinct lead_id)as unique_leads, count(distinct partner_id) as unique_partners from leadsandpartners
+group by date_id, make_name;
+
+
+create table followerscount(user_id int, follower_id int, primary key(user_id, follower_id));
+insert into followerscount values(0,1),(1,0),(2,0),(2,1);
+select distinct(user_id), count(follower_id)as followers from followerscount group by user_id order by user_id;
+
+
+create table employees_1741(emp_id int, event_day date, in_time int, out_time int, primary key(emp_id, event_day, in_time));
+insert into employees_1741 values(1, '2020-11-28', 4, 32), (1,'2020-11-28', 55, 200),(1,'2020-12-03', 1, 42),(2,'2020-11-28', 3, 33), (2,'2020-12-09', 47, 74);
+select event_day as day, emp_id, sum(out_time)-sum(in_time) total_time from employees_1741 group by event_day, emp_id;
+
+
+create table products_1757(product_id int primary key, low_fats varchar(5), recyclable varchar(5));
+insert into products_1757 values(0, 'Y', 'N'), (1, 'Y', 'Y'), (2,'N', 'Y'), (3, 'Y', 'Y'), (4, 'N','N');
+select product_id from products_1757 where low_fats='Y' and recyclable='Y';
+
+
+create table logins_1890(user_id int, time_stamp timestamp, primary key(user_id, time_stamp));
+insert into logins_1890 values(6, '2020-06-30 15:06:07'), (6, '2021-04-21 14:06:06'), (6, '2019-03-07 00:18:15'), (8, '2020-02-01 05:10:53'), (8, '2020-12-30 00:46:50'), (2, '2020-01-16 02:49:50'), (14, '2021-01-06 11:59:59');
+select user_id, max(time_stamp) as last_stamp from logins_1890 where time_stamp between '2020-01-01 00:00:00' and '2020-12-31 23:59:59'
+group by user_id
+order by user_id desc;
+
+
+create table employees_1965(employee_id int unique, name varchar(50));
+insert into employees_1965 values(2, 'Crew'),(4,'Haven'),(5,'Kristian');
+create table salaries_1965(employee_id int unique, salary int);
+insert into salaries_1965 values(5,7071), (1, 22517),(4,63539);
+select emp.employee_id from employees_1965 emp
+left join salaries_1965 sal on emp.employee_id=sal.employee_id
+where sal.employee_id is null
+union
+select sal.employee_id from salaries_1965 sal
+left join employees_1965 emp on emp.employee_id=sal.employee_id
+where emp.employee_id is null
+order by employee_id asc;
+
+
+create table employees_1978(employee_id int primary key, name varchar(50), manager_id int, salary int);
+insert into employees_1978 values(3, 'Mila', 9, 60301), (12, 'Antonella', null, 31000), (13, 'Emery', null, 67084),(1, 'Kalel',11, 21241), (9, 'Mikaela', null, 50937), (11, 'Joziah', 6, 28485);
+select employee_id from employees_1978 where manager_id not in(select employee_id from employees_1978)and salary<30000 order by employee_id;
+
+
+create table teacher_2356(teacher_id int, subject_id int, dept_id int, primary key(subject_id, dept_id));
+insert into teacher_2356 values(1,2,3),(1,2,4), (1,3,3),(2,1,1), (2,2,1),(2,3,1),(2,4,1);
+select teacher_id, count(distinct subject_id)as cnt from teacher_2356 group by teacher_id;
+
+
+create table employee_184(id int, name varchar(60), salary int, departmentId int);
+insert into employee_184 values(1,'Joe', 70000, 1),(2, 'Jim', 90000, 1),(3, 'Henry', 80000,2),(4, 'Sam',60000, 2),(5, 'Max', 90000, 1);
+create table department(id int primary key, name varchar(50));
+insert into department_184 values(1, 'IT'),(2,'Sales');
+select dept.name as Department, emp.name AS Employee, emp.salary AS Salary
+from employee_184 emp
+join department_184 dept on emp.departmentId = dept.id
+join (select departmentId,
+        max(salary) as max_salary from employee_184 group by departmentId
+)as dept_max
+    on emp.departmentId = dept_max.departmentId
+    and emp.salary = dept_max.max_salary;
+
+
+create table employee_570(id int primary key, name varchar(60), department varchar(40), managerId int);
+insert into employee_570 values(101, 'John', 'A', null), (102, 'Dan', 'A', 101),(103, 'James','A', 101),(104,'Amy', 'A', 101), (105, 'Anne', 'A',101),(106, 'Ron', 'B', 101);
+select em.name from employee_570 em
+inner join employee_570 e1 on em.id=e1.managerId
+group by em.id, em.name
+having count(em.id)>=5;
+
+
+create table users_1158(user_id int primary key, join_date date, favorite_brand varchar(30));
+insert into users_1158 values(1,'2018-01-01', 'Lenovo'), (2,'2018-02-09','Samsung'),(3,'2018-01-19', 'LG'), (4, '2018-05-21', 'HP');
+
+create table orderes_1158(order_id int primary key, order_date date, item_id int, buyer_id int, seller_id int);
+insert into orderes_1158 values(1,'2019-08-01',4,1,2),(2,'2018-08-02',2,1,3),(3,'2019-08-03',3,2,3), (4,'2018-08-04', 1,4,2),(5,'2018-08-04',1,3,4),(6,'2019-08-05',2,2,4);
+
+create table items(item_id int primary key, item_brand varchar(40));
+insert into items_1158 values(1,'Samsung'),(2,'Lenovo'),(3,'LG'), (4,'HP');
+select u.user_id as buyer_id, u.join_date, count(o.order_id)as orders_in_2019 from users_1158 u
+left join orders_1158 o on u.user_id=o.buyer_id and date_part('year',o.order_date)=2019
+group by u.user_id, u.join_date
+order by u.user_id asc;
+
+
+create table logs_180(id int primary key, num varchar(40));
+insert into logs_180 values(1,1),(2,1),(3,1),(4,2),(5,1),(6,2),(7,2);
+ select distinct l1.num as ConsecutiveNums from logs_180 l1
+join logs_180 l2 on l2.id=l1.id+1 and l2.num=l1.num
+join logs_180 l3 on l3.id=l2.id+1 and l3.num=l2.num;
+
+
+create table customers_1045(customer_id int, product_key int);
+insert into customers_1045 values(1,5),(2,6),(3,5),(3,6),(1,6);
+select customer_id from customers_1045 cus
+join product_1045 pro on cus.product_key=pro.product_key
+group by customer_id
+having count(distinct cus.product_key)=(select count(distinct product_key)from product_1045);
+
+
+create table trips_262(id int primary key, client_id int, driver_id int, city_id int, status varchar(30), request_at varchar(40));
+insert into trips_262 values(1,1,10,1,'completed', '2013-10-01'),(2,2,11,1,'cancelled_by_driver','2013-10-01'),(3,3,12,6,'completed','2013-10-01'),(4,4,13,6,'cancelled_by_client','2013-10-01'),(5,1,10,1,'completed','2013-10-02'),(6,2,11,6,'completed','2013-10-02'),(7,3,12,6,'completed','2013-10-02'),(9,3,10,12,'completed','2013-10-03'),(10,4,13,12,'cancelled_by_driver','2013-10-03');
+create table users(user_id int primary key, banned varchar(40), role varchar(40));
+insert into users values(1,'No', 'client'),(2,'Yes', 'client'), (3,'No','client'),(4,'No','client'),(10,'No','driver'), (12,'No','driver'),(13,'No', 'driver');
+with not_banned as (
+    select user_id from users_262
+    where banned = 'No'
+)
+select
+    request_at as Day, 
+    round(
+        sum(case when status like 'cancelled%' then 1.00 else 0 end) / count(*), 
+        2
+    ) as "Cancellation Rate"
+from trips_262
+where
+    client_id in (select user_id from not_banned)
+    and driver_id in (select user_id from not_banned)
+    and request_at between '2013-10-01' and '2013-10-03'
+group by request_at;
 ```
