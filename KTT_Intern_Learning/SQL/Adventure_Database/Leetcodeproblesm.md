@@ -353,4 +353,114 @@ where
     and driver_id in (select user_id from not_banned)
     and request_at between '2013-10-01' and '2013-10-03'
 group by request_at;
+
+
+create table insurance_585(pid int primary key, tiv_2015 float, tiv_2016 float, lat float, lon float);
+insert into insurance_585 values(1,10,5,10,10), (2,20,20,20,20),(3,10,30,20,20),(4,10,40,40,40);
+select round(sum(tiv_2016)::numeric,2)tiv_2016 from insurance_585
+where (tiv_2015)in(select tiv_2015 from insurance_585 group by tiv_2015 having count(*)>1) and(lat, lon)in(select lat,lon from insurance_585 group by lat, lon having count(*)=1);
+
+
+create table requestaccepted_602(requester_id int, accepter_id int, accept_date date, primary key(requester_id, accepter_id));
+insert into requestaccepted_602 values(1,2,'2016/06/03'),(1,3,'2016/06/08'),(2,3,'2016/06/08'),(3,4,'2016-06-09');
+select id, count(*) as num
+from (
+    SELECT requester_id as id from requestaccepted_602
+    union all
+    select accepter_id as id from requestaccepted_602
+) AS all_friends
+group by id
+order by num desc
+limit 1;
+
+
+create table seales_1070(sales_id int, product_id int, year int, quantity int, price int);
+insert into sales_1070 values(1,100,2008,10,5000),(2,100,2009,12,5000),(7,200,2011,15,9000);
+create table product(product_id int, product_name varchar(50));
+insert into product_1070 values(100,'Nokia'),(200,'Apple'),(300, 'Samsung');
+select
+    s.product_id,
+    s.year AS first_year,
+    s.quantity,
+    s.price
+from
+    sales_1070 s
+where
+    s.year = (
+        select min(s2.year)
+        from sales_1070 s2
+        where s2.product_id = s.product_id
+    ); 
+
+
+create table products(product_id int, new_price int, change_date date, primary key(product_id, change_date));
+insert into products_1164 values(1,20,'2019-08-14'),(2,50,'2019-08-14'),(1,30,'2019-08-15'),(1,35,'2019-08-16'),(2,65,'2019-08-17'),(3,20,'2019-08-18');
+select distinct product_id, 10 as price from products_1164 where product_id not in(select distinct product_id from products_1164 where change_date <='2019-08-16' )
+union
+select product_id, new_price as price from products_1164 where (product_id,change_date) in (select product_id , max(change_date) as date from Products_1164 where change_date <='2019-08-16' group by product_id);
+
+
+create table queue_1204(person_id int, person_name varchar(50), weight int, turn int);
+insert into queue_1204 values(5,'Alice', 250, 1),(4,'Bob',175,5),(3,'Alex',350,2),(6,'John Cena',400,3),(1,'Winston', 500, 6),(2,'Marie', 200, 4);
+select person_name from(select person_name,turn, sum(weight)over(order by turn)total_weight from queue_1204)temp
+where total_weight<=1000
+order by turn desc
+limit 1;
+
+
+create table users_1587(account int primary key, name varchar(50));
+insert into users_1587 values(900001,'Alice'), (900002,'Bob'), (900003,'Charlie');
+create table transactions_1587(trans_id int primary key, account int, amount int, transacted_on date);
+insert into transactions_1587 values(1,900001,7000, '2020-08-01'),(2,900001,7000,'2020-09-01'),(3,90001, -3000, '2020-09-02'),(4,900002,1000,'2020-09-12'),(5,900003,6000,'2020-08-07'),(6,900003,6000,'2020-09-07'),(7,900003,-4000,'2020-09-11');
+select name,sum(amount) AS balance from transactions_1587 t
+inner join users_1587 u using(account)
+group by name
+having sum(amount) > 10000;
+
+
+create table seat_626(id int primary key, student varchar(50));
+insert into seat_626 values(1,'Abbot'),(2,'Doris'),(3,'Emerson'),(4,'Green'),(5,'Jeames');
+select(
+  case when id % 2 = 1 and  id = (select max(id) from Seat_626) then id
+  when id % 2 = 1 then id + 1
+  when id % 2 = 0 then id - 1
+  end ) as id, student
+from Seat_626
+order by id;
+
+
+ create table validemail_1517(user_id int primary key, name varchar(50), mail varchar(50));
+ insert into validemail_1517 values(1,'Winston', 'winston@leetcode.com'), (2,'Jonathan','jonathanisgreat'),(3,'Annabelle','bella-@leetcode.com'),(4, 'Sally','sally.come@leetcode.com'),(5,'Marwan','quarz#2020@leetcode.com'),(6,'David','david69@gmail.com'),(7,'Shapiro','.shapo@leetcode.com');
+ select * from validemail_1517 where mail ~'^[a-zA-Z]+[a-zA-Z0-9_.-]*@leetcode\.com$';
+
+
+ create table delivery_1174(delivery_id int, customer_id int, order_date date, customer_pref_delivery_date date);
+ insert into delivery_1174 values(1,1,'2019-08-01','2019-08-02'),(2,2,'2019-08-02','2019-08-02'),(3,1,'2019-08-11','2019-08-12'),(4,3,'2019-08-24', '2019-08-24'),(5,3,'2019-08-21','2019-08-22'),(6,2,'2019-08-11','2019-08-13'),(7,4,'2019-08-09', '2019-08-09');
+ select round (avg(case when order_date = customer_pref_delivery_date then 1
+ else 0 end)*100, 2) as immediate_percentage
+ from delivery_1174
+ where (customer_id, order_date) in (
+                 select customer_id,
+                     min(order_date)
+                     from delivery_1174
+                     group by customer_id
+ );
+
+
+ create table stocks_1393(stock_name varchar(50), operation varchar(50), operation_day int, price int);
+ insert into stocks_1393 values('Leetcode', 'Buy',1,1000),('Corona Masks','Buy',2,10),('Leetcode','Sell',5,9000),('Hanbags','Buy',17,30000),('Corona Masks', 'Sell', 3,1010),('Corona Masks', 'Buy', 4,1000),('Corona Masks', 'Sell', 5,500),('Handbags','Sell',29,7000),('Corona Masks', 'Sell',10,10000);
+ select stock_name,sum(case when operation = 'Sell' then price else -price end) as capital_gain_loss from stocks_1393 group by stock_name;
+
+
+ create table transactions_1193(id int primary key, country varchar(40), state varchar(20), amount int, trans_date date);
+ insert into transactions_1193 values(121, 'US', 'approved', 1000, '2018-12-18'), (122,'US', 'declined', 2000, '2018-12-19'),(123, 'US', 'approved', 2000, '2019-01-01'),(124, 'DE', 'approved', 2000, '2019-01-07');
+  select TO_CHAR(trans_date,'YYYY-MM') as month,
+        country,
+        count(id) as trans_count,
+        sum(case when state='approved' then 1 else 0 end) as approved_count,
+        sum(amount) as trans_total_amount,
+        sum(case when state='approved' then amount else 0 end) as approved_total_amount
+from transactions_1193
+group by month, country
+order by month;
 ```
