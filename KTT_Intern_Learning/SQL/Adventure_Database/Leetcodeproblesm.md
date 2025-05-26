@@ -463,4 +463,119 @@ order by id;
 from transactions_1193
 group by month, country
 order by month;
+
+
+create table products_1795(product_id int primary key, store1 int, store2 int, store3 int)
+insert into products_1795 values(0,95,100,105), (1,70,null, 80);
+select product_id, store1 as store from products_1795 where store1 is not null union select product_id, store2 as store from products_1795 where store2 is not null union select product_id, store3 as store from products_1795 where store3 is not null;
+
+
+create table employee_1789(employee_id int, department_id int, primary_flag varchar(20), primary key(employee_id, department_id));
+insert into employee_1789 values(1,1,'N'),(2,1,'Y'),(2,2,'N'),(3,3,'N'),(4,2,'N'),(4,3,'Y'),(4,4,'N');
+select employee_id, department_id from employee_1789 where primary_flag='Y' or employee_id in(select employee_id from employee_1789 group by employee_id having count(employee_id)=1);
+
+
+create table accounts_1907(account_id int primary key, income int);
+insert into accounts_1907 values(3,108939),(2,12747),(8,87709),(6,91796);
+select d.category, coalesce(f.accounts_count, 0) accounts_count from (select case when income < 20000 then 1 when income <= 50000 then 2 else 3 end as bucket_id, count(account_id) accounts_count from accounts_1907 group by case when income < 20000 then 1 when income <= 50000 then 2 else 3 end) f right join (values(1, 'Low Salary'), (2, 'Average Salary'), (3, 'High Salary')) d(bucket_id, category) on d.bucket_id = f.bucket_id;
+
+
+create table activity_550(player_id int, device_id int, event_date date, games_played int, primary key(player_id, event_date));
+insert into activity_550 values(1,2,'2016-03-01',5),(1,2,'2016-03-02',6),(2,3,'2017-06-25',1),(3,1,'2016-03-02',0),(3,4,'2018-07--3',5);
+select round(1.0 * count(player_id) / (select count(distinct player_id)from activity_550), 2) as fraction
+from activity_550
+where (player_id, event_date)in (
+    select player_id, min(event_date) + 1 from activity_550 group by player_id
+);
+
+
+create table signups_1934(user_id int unique, time_stamp timestamp);
+insert into signups_1934 values(3,'2020-03-21 10:16:13'),(7,'2020-01-04 13:57:59'),(2,'2020-07-29 23:09:44'),(6,'2020-12-09 10:39:37');
+create table confirmations_1934(user_id int, time_stamp timestamp,action varchar(20));
+insert into confirmation_1934 values(1,'2021-01-06 03:30:46','timeout'),(3,'2021-07-14 14:00:00','timeout'),(7,'2021-06-12 11:57:29','confirmed'),(7,'2021-06-13 12:58:28','confirmed'),(7,'2021-06-14 13:59:27','confirmed'),(2,'2021-01-22 00:00:00','confirmed'),(2,'2021-02-28 23:59:59','timeout');
+select s.user_id, round(coalesce(sum(case when c.action='confirmed' then 1 else 0 end)*1.0 / nullif(count(c.action),0),0),2) confirmation_rate from signups_1934 s
+left join confirmation_1934 c on s.user_id=c.user_id
+group by s.user_id;
+
+
+create table employees_1731(employee_id int unique, name varchar(50), reports_to int, age int);
+insert into employees_1731 values(9,'Hercy',null,43),(6,'Alice',9,41),(4,'Bob',9,36),(2,'Winston',null,37);
+select e.employee_id, e.name, count(em.employee_id)reports_count, round(avg(em.age))average_age from employees_1731 e
+join employees_1731 em on e.employee_id=em.reports_to
+group by e.employee_id, e.name
+order by e.employee_id;
+
+
+create table customer(customer_id int, name varchar(50), visited_on date, amount int);
+INSERT INTO customer_1321 (customer_id, name, visited_on, amount) VALUES
+(1, 'Jhon', '2019-01-01', 100),(2, 'Daniel', '2019-01-02', 110),(3, 'Jade', '2019-01-03', 120),(4, 'Khaled', '2019-01-04', 130),(5, 'Winston', '2019-01-05', 110),(6, 'Elvis', '2019-01-06', 140),(7, 'Anna', '2019-01-07', 150),(8, 'Maria', '2019-01-08', 80),(9, 'Jaze', '2019-01-09', 110),(1, 'Jhon', '2019-01-10', 130),(3, 'Jade', '2019-01-10', 150);
+with last_6_days as (
+    select distinct visited_on
+    from customer_1321
+    order by visited_on asc offset 6
+)
+leetcode-# select c1.visited_on, sum(c2.amount) as amount, round(sum(c2.amount) / 7., 2)  as average_amount from last_6_days as c1
+inner join customer_1321 as c2 on c2.visited_on BETWEEN c1.visited_on - 6 and c1.visited_on
+group by c1.visited_on;
+
+
+create table activity(machine_id int, process_id int, activity_type varchar(10), timestamp float);
+insert into activity_1661 (machine_id, process_id, activity_type, timestamp) VALUES
+(0, 0, 'start', 0.712),
+(0, 0, 'end', 1.520),
+(0, 1, 'start', 3.140),
+(0, 1, 'end', 4.120),
+(1, 0, 'start', 0.550),
+(1, 0, 'end', 1.550),
+(1, 1, 'start', 0.430),
+(1, 1, 'end', 1.420),
+(2, 0, 'start', 4.100),
+(2, 0, 'end', 4.512),
+(2, 1, 'start', 2.500),
+(2, 1, 'end', 5.000);
+select  machine_id,
+        round(avg(case when activity_type = 'start' then -timestamp else timestamp end)::decimal * 2 , 3) as processing_time
+from activity_1661 group by machine_id
+order by machine_id asc;
+
+
+create table movies_1341(movie_id int primary key, title varchar(20));
+insert into movies_1341 values(1,'Avengers'),(2,'Frozon 2'),(3,'Joker');
+create table users_1341(user_id int primary key, name varchar(50));
+insert into users_1341 values(1,'Daniel'),(2,'Monica'),(3,'Maria'),(4,'James');
+create table movierating_1341(movie_id int, user_id int, rating int, created_at date, primary key(movie_id, user_id));
+insert into movierating_1341 (movie_id, user_id, rating, created_at) VALUES
+(1, 1, 3, '2020-01-12'),
+(1, 2, 4, '2020-02-11'),
+(1, 3, 2, '2020-02-12'),
+(1, 4, 1, '2020-01-01'),
+(2, 1, 5, '2020-02-17'),
+(2, 2, 2, '2020-02-01'),
+(2, 3, 2, '2020-03-01'),
+(3, 1, 3, '2020-02-22'),
+(3, 2, 4, '2020-02-25');
+
+with movierating_in_february_2020 as (
+    select *
+    from movieRating_1341
+    where TO_CHAR(created_at, 'yyyy-mm') = '2020-02'
+),
+movie_title as (
+    select title
+    from movierating_in_february_2020
+    inner join movies_1341 using(movie_id)
+    group by movie_id, title
+    order by avg(rating) desc,title asc limit 1
+),
+user_name_who_has_rated_the_greatest_number_of_movies as (
+    select name from movieRating_1341
+    inner join users_1341
+    using(user_id) group by user_id, name
+    order by count(movie_id) desc,name asc limit 1
+)
+select name as results from user_name_who_has_rated_the_greatest_number_of_movies
+union all select title from movie_title;
+
+
+
 ```
