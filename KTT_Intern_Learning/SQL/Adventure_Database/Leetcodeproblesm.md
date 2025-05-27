@@ -577,5 +577,75 @@ select name as results from user_name_who_has_rated_the_greatest_number_of_movie
 union all select title from movie_title;
 
 
+create table tree_608(id int unique, p_id int);
+insert into tree_608 values(1,null),(2,1),(3,1),(4,2),(5,2);
+select id, case when p_id is null then 'Root' when id not in(select p_id from tree_608 where p_id is not null) then 'Leaf' else 'Inner' end as type from tree_608;
+
+
+create table users_3436(user_id int unique, email varchar(50));
+insert into users_3436 values(1,'alice@example.com'),(2,'bob_at_example.com'),(3,'charlie@example.net'),(4,'david@domain.com'),(5,'eve@invalid');
+select * from users_3436 where email ~ '^\w+@\w+\.com$';
+
+
+
+create table products_3465(product_id int unique, product_name varchar(100), description varchar(100));
+insert into products_3465 values(1, 'Widget A', 'This is a sample product with SN1234-5678'),(2,'Widget B','A product with serial SN9876-1234 in the description'),(3,'Widget E','Check out SN4321-8765 in this description');
+select * from products_3465 where description like '%SN____-____' or description like '%SN____-____ %';
+
+
+create table samples_3475(sample_id int unique, dna_sequence varchar(50), species varchar(40));
+insert into samples_3475 values(1,'ATGCTAGCTAGCTAA', 'Human'),(2,'GGGTCAATCATC','Human'),(3,'ATATATCGTAGCTA','Human'),(4,'ATGGGGTCATCATAA','Mouse'),(5,'TCAGTCAGTCAG','Mouse'),(6,'ATATCGCGCTAG','Zebrafish'),(7,'CGTATGCGTCGTA','Zebrafish');
+INSERT 0 7
+select sample_id,
+       dna_sequence,species,
+       dna_sequence ~ '^ATG'           as has_start,
+       dna_sequence ~ 'TAA$|TAG$|TGA$' as has_stop,
+       dna_sequence ~ '.*ATAT.*'       as has_atat,
+       dna_sequence ~ '.*GGG.*'        as has_ggg
+from samples_3475
+order by sample_id;
+
+
+create table useractivity_3497(user_id int, activity_date date, activity_type varchar(50), activity_duration int);
+insert into useractivity_3497 (user_id, activity_date, activity_type, activity_duration) VALUES
+(1, '2023-01-01', 'free_trial', 45),(1, '2023-01-02', 'free_trial', 30),(1, '2023-01-05', 'free_trial', 60),(1, '2023-01-10', 'paid', 75),(1, '2023-01-12', 'paid', 90),(1, '2023-01-15', 'paid', 65),(2, '2023-02-01', 'free_trial', 55)(2, '2023-02-03', 'free_trial', 25),(2, '2023-02-07', 'free_trial', 50),(2, '2023-02-10', 'cancelled', 0),(3, '2023-03-05', 'free_trial', 70),(3, '2023-03-06', 'free_trial', 60),(3, '2023-03-08', 'free_trial', 80),(3, '2023-03-12', 'paid', 50),(3, '2023-03-15', 'paid', 55),(3, '2023-03-20', 'paid', 85),(4, '2023-04-01', 'free_trial', 40),(4, '2023-04-03', 'free_trial', 35),(4, '2023-04-05', 'paid', 45),(4, '2023-04-07', 'cancelled', 0);
+with cte_free as (
+    select user_id ,
+    round(avg(activity_duration),2) as trial_avg_duration
+    from useractivity_3497
+    where activity_type='free_trial'
+    group by user_id
+), cte_paid as (
+    select user_id ,
+    round(avg(activity_duration),2) as paid_avg_duration
+    from useractivity_3497
+    where activity_type='paid'
+    group by user_id
+)
+select p.user_id, trial_avg_duration, paid_avg_duration from cte_paid p join cte_free f on p.user_id = f.user_id
+order by p.user_id;
+
+
+create table stadium_601(id int, visit_date date unique, people int);
+insert into stadium_601 values(1,'2017-01-01',10),(2,'2017-01-02',109),(3,'2017-01-03',150),(4,'2017-01-04',99),(5,'2017-01-05',145),(6,'2017-01-06',1455),(7,'2017-01-07',199),(8,'2017-01-09',188);
+select distinct a.* from stadium_601 as a, stadium_601 as b,stadium_601 as c where a.people>=100 and b.people>=100 and c.people>=100 and((a.id - b.id = 1 and b.id - c.id = 1)or (c.id - b.id = 1 and b.id - a.id = 1)or(b.id - a.id = 1 and a.id - c.id = 1)) order by a.visit_date;
+
+
+create table productpurchase_3554(user_id int, product_id int, quantity int, unique(user_id, product_id));
+insert into productpurchase_3554 (user_id, product_id, quantity) VALUES
+(1, 101, 2),(1, 102, 1),(1, 201, 3),(1, 301, 1),(2, 101, 1),(2, 102, 2),(2, 103, 1),(2, 201, 5),(3, 101, 2),(3, 103, 1),(3, 301, 4),(3, 401, 2),(4, 101, 1),(4, 201, 3),(4, 301, 1),(4, 401, 2),(5, 102, 2),(5, 103, 1),(5, 201, 2),(5, 202, 3);
+with fp as (
+	select user_id, category
+	from productPurchase_3554 p
+	inner join productinfo_3554 p1 on p.product_id = p1.product_id
+), main_proccess as (
+	select P.category as category1, P1.category as category2, count(distinct P.user_id ) customer_count 
+	from fp P inner join fp P1 on P.category < P1.category and P.user_id = P1.user_id
+	group by P.category, P1.category
+	having(count(distinct P.user_id)) > 2
+)
+select category1, category2,customer_count from main_proccess M order by customer_count desc, category1, category2;
+
+
 
 ```
