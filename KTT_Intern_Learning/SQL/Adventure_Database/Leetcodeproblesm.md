@@ -647,5 +647,87 @@ with fp as (
 select category1, category2,customer_count from main_proccess M order by customer_count desc, category1, category2;
 
 
+create table sales_3464(sales_id int unique, product_id int, sales_date date, quantity int,price decimal);
+insert into sales_3464 (sales_id, product_id, sales_date, quantity, price) VALUES
+(1, 1, '2023-01-15', 5, 10.00),(2, 2, '2023-01-20', 4, 15.00),(3, 3, '2023-03-10', 3, 18.00),(4, 4, '2023-04-05', 1, 20.00),(5, 1, '2023-05-20', 2, 10.00),(6, 2, '2023-06-12', 4, 15.00),(7, 5, '2023-06-15', 5, 12.00),(8, 3, '2023-07-24', 2, 18.00),(9, 4, '2023-08-01', 5, 20.00),(10, 5, '2023-09-03', 3, 12.00),(11, 1, '2023-09-25', 6, 10.00),(12, 2, '2023-11-10', 4, 15.00),(13, 3,'2023-12-05', 6, 18.00),(14, 4, '2023-12-22', 3, 20.00),(15, 5, '2024-02-14', 2, 12.00);
+with seasons as (
+	select season_id, season_name
+	from(values(1,'Winter'),(2,'Winter'),(12,'Winter'),
+		 (3,'Spring'),(4,'Spring'),(5,'Spring'),
+		 (6,'Summer'),(7,'Summer'),(8,'Summer'),
+		 (9,'Fall'),(10,'Fall'),(11,'Fall')
+	)as tbl(season_id, season_name) 
+	order by season_name
+),
+process_season_matching AS (
+	select category, (select season_name from seasons where extract(month from sale_date) = season_id) as season, sum(quantity) total_quantity, sum(quantity * price) AS total_revenue 
+	FROM sales S
+	left join products P on S.product_id = P.product_id
+	group by category, (select season_name from seasons where extract( month from sale_date) = season_id)
+),
+process_ranking as (select* from (select category, season, total_quantity, total_revenue, dense_rank() over(partition by season order by total_quantity desc, total_revenue desc) ranking from process_season_matching
+	)sub where ranking = 1
+)
+select distinct season_name as season, R.category, R.total_quantity, R.total_revenue from seasons S
+left join process_ranking R on S.season_name = R.season;
 
+
+create table productpurchase_3521 (
+    user_id int,
+    product_id int,
+    quantity int,
+    primary key (user_id, product_id)
+);
+create table productinfo_3521 (
+    product_id int primary key,
+    category varchar(100),
+    price decimal(10, 2)
+);
+insert into productinfo_3521 (product_id, category, price) values
+(101, 'electronics', 199.99),
+(102, 'clothing', 49.95),
+(103, 'groceries', 5.49),
+(104, 'books', 15.99),
+(105, 'electronics', 299.99);
+-- sample data for productpurchase_3521
+insert into productpurchase_3521 (user_id, product_id, quantity) values
+(1, 101, 1),
+(1, 102, 2),
+(2, 103, 5),
+(3, 101, 1),
+(3, 104, 1),
+(4, 105, 1);
+with pair as (
+    select
+        p1.product_id as product1_id,
+        p2.product_id as product2_id,
+        p1.user_id
+    from productpurchase_3521 p1
+    join productpurchase_3521 p2 
+        on p1.user_id = p2.user_id 
+        and p1.product_id < p2.product_id
+),
+procnt as (
+    select distinct
+        product1_id,
+        product2_id,
+        count(*) over (partition by product1_id, product2_id) as countpro
+    from pair
+)
+select
+    pc.product1_id,
+    pc.product2_id,
+    p1.category as product1_category,
+    p2.category as product2_category,
+    pc.countpro as customer_count
+from procnt pc
+join productinfo_3521 p1 on p1.product_id = pc.product1_id
+join productinfo_3521 p2 on p2.product_id = pc.product2_id
+where pc.countpro >= 3
+order by pc.countpro desc, pc.product1_id, pc.product2_id;
+
+
+create table logs_3451(log_id int unique, ip varchar(50), status_code int);
+insert into logs_3451 values(1,'192-168.1.1',200),(2,'256.1.2.3',404),(3,'192.168.001.1',200),(4,'192.168.1.1',200),(5,'192.188.1',500),(6,'256.1.2.3',404),(7,'192.168.001.1',200);
+select ip, count(*)as invalid_count from logs_3451 where ip !~'^((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\.){3}(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])$' group by ip order by invalid_count desc;
 ```
