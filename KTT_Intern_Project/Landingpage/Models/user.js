@@ -1,29 +1,49 @@
-const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = new Sequelize({
-  host: '127.0.0.1',
-  dialect: 'postgres',
-  username: 'postgres',  
-  password: 'Paneer@123',  
-  database: 'postgres',  
-  logging: false,           
-});
+module.exports = (sequelize, DataTypes) => {
+  const User = sequelize.define('User', {
+    employee_id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    name: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+    },
+    email: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+      unique: true,
+      validate: {
+        isEmail: true,
+      },
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    role: {
+      type: DataTypes.ENUM('Manager', 'Employee'),
+      allowNull: false,
+    },
+    manager_id: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+  }, {
+    tableName: 'Users',
+    timestamps: false,
+  });
 
-const User = sequelize.define('User', {
-  email: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    unique: true,
-    validate: {
-      isEmail: true,
-    }
-  },
-  password: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  }
-});
-sequelize.sync()
-  .then(() => console.log("Database synced"))
-  .catch(err => console.log("Error syncing database: ", err));
+  User.associate = (models) => {
+    User.hasMany(models.User, {
+      foreignKey: 'manager_id',
+      as: 'Team',
+    });
+    User.belongsTo(models.User, {
+      foreignKey: 'manager_id',
+      as: 'Manager',
+    });
+  };
 
-module.exports = { User, sequelize };
+  return User;
+};

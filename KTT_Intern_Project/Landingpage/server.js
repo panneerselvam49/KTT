@@ -1,17 +1,29 @@
 const express = require('express');
 const path = require('path');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const authRouter = require('./routes/auth');
+const db = require('./models'); // Sequelize models
+const authRoutes = require('./routes/auth'); // <-- Important
+
 const app = express();
-app.use(cors());
+
+// Middleware
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public'))); 
+app.use(express.urlencoded({ extended: true }));
+
+// Serve static files
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Use the /api/register route
+app.use('/api', authRoutes); // <-- This is the key line
+
+// Serve the HTML form
 app.get('/', (req, res) => {
-  res.send('Server is working correctly');
+  res.sendFile(path.join(__dirname, 'public', 'reworkedform.html'));
 });
-app.get('/reworkedform', (req,res)=>{
-})
-app.listen(3000, () => {
-  console.log('Server running on http://localhost:3000');
+
+// Start the server
+db.sequelize.sync().then(() => {
+  console.log('Database synced');
+  app.listen(3000, () => {
+    console.log('Server is running on http://localhost:3000');
+  });
 });
